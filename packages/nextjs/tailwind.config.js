@@ -8,8 +8,8 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        light: 
-{
+        light:
+        {
           primary: "#0BB489", // dark green
           "primary-content": "#F9FBFF", //White
           secondary: "#0BB489",
@@ -40,9 +40,9 @@ module.exports = {
             opacity: "80%",
           },
         },
-      
-        dark: 
-{
+
+        dark:
+        {
           primary: "#0BB489",
           "primary-content": "#F9FBFF",
           secondary: "#05856E",
@@ -73,7 +73,6 @@ module.exports = {
             opacity: "80%",
           },
         },
-,
       },
     ],
   },
