@@ -34,5 +34,5 @@ contract ReqPay {
         );
     }
 
-    function reqLookUp() external {}
+    function reqLookUp(address _user) external {}
 }
