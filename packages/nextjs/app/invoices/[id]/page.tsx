@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { RequestNetwork } from "@requestnetwork/request-client.js";
+import { PaymentReferenceCalculator } from "@requestnetwork/request-client.js";
 import { formatUnits } from "viem";
 import { useAccount, useWalletClient } from "wagmi";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
@@ -13,7 +14,7 @@ const InvoiceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const invoiceid = id;
   const contractName = "ERC20FeeProxy";
-  const { writeContract, isPending } = useScaffoldWriteContract(contractName);
+  const { writeContractAsync, isPending } = useScaffoldWriteContract(contractName);
   const { address } = useAccount();
   const { data: walletClient } = useWalletClient();
 
@@ -133,7 +134,6 @@ const InvoiceDetails: React.FC = () => {
       });
       return <>{elements}</>;
     };
-    console.log("details", details);
     if (
       !details ||
       (Object.keys(details).length === 1 && Object.keys(details.address || {}).length === 0) ||
@@ -146,23 +146,31 @@ const InvoiceDetails: React.FC = () => {
 
   const payInvoice = async () => {
     const data = await request.getData();
+    console.log("data", data);
+    console.log("data.requestId", data.requestId);
+    console.log("data.salt", data.salt);
+    console.log("data.payee.value", data.payee.value);
+    const paymentReference = PaymentReferenceCalculator.calculate(data.requestId, data.salt, data.payee.value);
+    console.log("paymentReference", paymentReference);
     const currency = data.currencyInfo.value;
     const amount = BigInt(data.expectedAmount);
     const receiver = data.payee.value;
 
+    console.log("currency", currency);
+    console.log("amount", amount);
+    console.log("receiver", receiver);
+    console.log("data", data);
     try {
       console.log("Sending request...");
-      await writeContract({
+      await writeContractAsync({
         functionName: "transferFromWithReferenceAndFee",
-        args: [currency, receiver, amount, data, 0n, "0x399F5EE127ce7432E4921a61b8CF52b0af52cbfE"],
+        args: [currency, receiver, amount, "0x", 0n, receiver],
       });
 
       console.log("Request sent!");
     } catch (error) {
       console.error("Error sending request: ", error);
     }
-
-    console.log("paying invoice");
   };
 
   return (
