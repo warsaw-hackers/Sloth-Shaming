@@ -3,6 +3,10 @@ src = 'contracts'
 out = 'out'
 libs = ['lib']
 fs_permissions = [{ access = "read-write", path = "./"}]
+remappings = [
+    '@solady/contracts/=lib/solady/src/',
+    '@request/contracts/=lib/requestNetwork/packages/smart-contracts/src/contracts/'
+]
 
 [rpc_endpoints]
 default_network = "http://127.0.0.1:8545"
@@ -27,18 +31,25 @@ zkSyncTestnet = "https://testnet.era.zksync.dev"
 zkSync = "https://mainnet.era.zksync.io"
 scrollSepolia = "https://sepolia-rpc.scroll.io"
 scroll = "https://rpc.scroll.io"
+alephZeroTestnet = "https://rpc.alephzero-testnet.gelato.digital"
+celoTestnet = "https://alfajores-forno.celo-testnet.org"
+zircuitTestnet = "http://zircuit1-testnet.p2pify.com"
+mantleTestnet = "https://rpc.sepolia.mantle.xyz"
+
 
 [etherscan]
 polygonMumbai = { key = "${ETHERSCAN_API_KEY}" }
 sepolia = { key = "${ETHERSCAN_API_KEY}" }
+celoTestnet = { key = "${CELO_API_KEY}", chain = 44787, url="https://alfajores.celoscan.io" }
+scrollSepolia = { key = "${SCROLL_API_KEY}", chain = 534351, url = "https://api-sepolia.scrollscan.com/api" }
+optimismSepolia = { key = "${OPTIMISM_API_KEY}", chain = 11155420, url = "https://api-sepolia.scrollscan.com/api" } 
 
-
-[fmt]
-multiline_func_header = "params_first"
-line_length = 80
-tab_width = 2
-quote_style = "double"
-bracket_spacing = true
-int_types = "long"
+# [fmt]
+# multiline_func_header = "params_first"
+# line_length = 80
+# tab_width = 2
+# quote_style = "double"
+# bracket_spacing = true
+# int_types = "long"
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
