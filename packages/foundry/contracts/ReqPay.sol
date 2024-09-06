@@ -1,15 +1,38 @@
-//SPDX-License-Identifier: MIT
-pragma solidity >=0.8.0 <0.9.0;
+//SPDX-License-Identifier: GPL-3.0
+pragma solidity 0.8.26;
 
-// Useful for debugging. Remove when deploying to a live network.
-import "forge-std/console.sol";
+import {ERC20FeeProxy} from "@request/contracts/ERC20FeeProxy.sol";
 
 /**
- * A smart contract that allows changing a state variable of the contract and tracking the changes
- * It also allows the owner to withdraw the Ether in the contract
- * @author 0xjsi
+ * @title ReqPay
+ * @notice Request handling
+ * @author https://x.com/0xjsieth
+ *
  */
 contract ReqPay {
+    ERC20FeeProxy public feeProxy;
+
+    constructor (address payable _feeProxy) {
+        feeProxy = ERC20FeeProxy(_feeProxy);
+    }
+
+    function pay(
+        address _tokenAddress,
+        address _to,
+        uint256 _amount,
+        bytes calldata _paymentReference,
+        uint256 _feeAmount,
+        address _feeAddress
+    ) external payable {
+        feeProxy.transferFromWithReferenceAndFee(
+            _tokenAddress,
+            _to,
+            _amount,
+            _paymentReference,
+            _feeAmount,
+            _feeAddress
+        );
+    }
+
     function reqLookUp() external {}
-    function pay() external payable {}
 }

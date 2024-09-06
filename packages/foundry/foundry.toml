@@ -5,7 +5,8 @@ libs = ['lib']
 fs_permissions = [{ access = "read-write", path = "./"}]
 remappings = [
     '@solady/contracts/=lib/solady/src/',
-    '@request/contracts/=lib/requestNetwork/packages/smart-contracts/src/contracts/'
+    '@request/contracts/=lib/requestNetwork/packages/smart-contracts/src/contracts/',
+    '@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts'
 ]
 
 [rpc_endpoints]
