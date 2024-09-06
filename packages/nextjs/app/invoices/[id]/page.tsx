@@ -4,14 +4,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { RequestNetwork } from "@requestnetwork/request-client.js";
 import { formatUnits } from "viem";
-import { useAccount, useWalletClient, useWriteContract } from "wagmi";
+import { useAccount, useWalletClient } from "wagmi";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { calculateStatus, displayOrder, findCurrency, keyLabelMapping } from "~~/utils/request/helper";
 import { initializeRequestNetwork } from "~~/utils/request/initializeRN";
 
 const InvoiceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const invoiceid = id;
-  const { writeContract } = useWriteContract();
+  const contractName = "ERC20FeeProxy";
+  const { writeContract, isPending } = useScaffoldWriteContract(contractName);
   const { address } = useAccount();
   const { data: walletClient } = useWalletClient();
 
@@ -147,12 +149,19 @@ const InvoiceDetails: React.FC = () => {
     const currency = data.currencyInfo.value;
     const amount = BigInt(data.expectedAmount);
     const receiver = data.payee.value;
-    await writeContract({
-      abi: ["function transfer(address to, uint256 value) returns (bool)"],
-      address: currency,
-      functionName: "transfer",
-      args: [receiver, amount ? BigInt(amount.toString()) : 0n],
-    });
+
+    try {
+      console.log("Sending request...");
+      await writeContract({
+        functionName: "transferFromWithReferenceAndFee",
+        args: [currency, receiver, amount, data, 0n, "0x399F5EE127ce7432E4921a61b8CF52b0af52cbfE"],
+      });
+
+      console.log("Request sent!");
+    } catch (error) {
+      console.error("Error sending request: ", error);
+    }
+
     console.log("paying invoice");
   };
 
@@ -260,7 +269,11 @@ const InvoiceDetails: React.FC = () => {
       {/* Pay Now Button */}
       {(invoiceData.state === "Created" || invoiceData.state === "Pending") && invoiceData.to === address && (
         <div className="text-right">
-          <button className="bg-secondary text-primary-content py-2 px-4 rounded" onClick={payInvoice}>
+          <button
+            className="bg-secondary text-primary-content py-2 px-4 rounded"
+            disabled={isPending}
+            onClick={payInvoice}
+          >
             Pay now 💸
           </button>
         </div>
