@@ -1,0 +1,6 @@
+[submodule "packages/foundry/lib/requestNetwork"]
+	path = packages/foundry/lib/requestNetwork
+	url = https://github.com/RequestNetwork/requestNetwork
+[submodule "packages/foundry/lib/solady"]
+	path = packages/foundry/lib/solady
+	url = https://github.com/Vectorized/solady
