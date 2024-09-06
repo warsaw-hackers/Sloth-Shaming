@@ -27,20 +27,32 @@ Before you begin, you need to install the following tools:
 
 ## Hackathon bounties
 
+### Golem
+TODO
+
 ### Request Network - Best app that creates requests
+TODO
 
 ### Celo
-
+TODO
 
 ### DragonSwap - Pooled bounty
-
+TODO
 
 ### Worldcoin - Best Use of World ID 
-
+TODO
 
 ### Zircuit - Best Project on Zircuit
+TODO
 
 ### ENS - Best use of ENS
+TODO
+
+### BuidlGuidl - Best Scaffold-ETH2 Submission
+We initialized the project using Scaffold-ETH 2 with the [SE2 Request Network extension](https://github.com/arjanjohan/scaffold-request-extension). 
+
+### Mantle Network - Best UX/UI project
+TODO
 
 
 ## Links
