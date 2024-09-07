@@ -49,10 +49,10 @@ We created a reputation system for to create, query and update reputation on cha
 We initialized the project using Scaffold-ETH 2 with the [SE2 Request Network extension](https://github.com/arjanjohan/scaffold-request-extension). 
 
 ### Worldcoin - Best Use of World ID 
-We use Worldcoin World ID for preventing sybill and spam attacks, to ensure a more fair and robust reputation system.
+We use Worldcoin World ID for preventing sybil and spam attacks, to ensure a more fair and robust reputation system.
 
 ### Golem
-In order to automatically generate roasts for late payments, we use Golem to run an AI model. These roasts then gets posted to x dot com the everything app.
+Our initial idea was to automatically generate roasts for late payments, we use Golem to run an AI model. These roasts would then get posted to x dot com the everything app. However we ran into some issues with golem not being compatible with next.js, which we were using for this project. However, we tried [really hard to make it work...](https://github.com/warsaw-hackers/Sloth-Shaming/compare/main...fix/some-golem-and-more#diff-15e0d26ec9f58bd67e1b65e13d49199c054aa3055e9833a8613d3b1832c48712)
 
 ### Optimism
 We deployed our contracts on Optimism Sepolia, because Worldcoin World ID is required for our dApp. Also it's possible to pay invoices on Optimism within our dApp. [Deployment](https://sepolia-optimism.etherscan.io/address/0xBf8C8Ef202C8D14f8657f6E476c0F115906c773D)
