@@ -12,6 +12,7 @@ const scaffoldConfig = {
   // The networks on which your DApp is live
   targetNetworks: [
     chains.sepolia,
+    chains.baseSepolia,
     // chains.zircuitTestnet,
     // chains.mantleSepoliaTestnet,
     // chains.celoAlfajores,

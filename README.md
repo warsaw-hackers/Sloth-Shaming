@@ -1,4 +1,4 @@
-# 🏗 Scaffold-ETH 2
+# 🏗 Sloth Shaming
 
 <h4 align="center">
   <a href="https://docs.scaffoldeth.io">Documentation</a> |
@@ -7,7 +7,7 @@
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
 
-⚙️ Built using NextJS, RainbowKit, Foundry, Wagmi, Viem, and Typescript.
+⚙️ Built using NextJS, Foundry, Wagmi, Viem, and Figma.
 
 - ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
 - 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
@@ -31,19 +31,19 @@ Before you begin, you need to install the following tools:
 TODO
 
 ### Request Network - Best app that creates requests
-TODO
+We created a reputation system for request payments.
 
 ### Celo
-TODO
+We use Celo Alfojores testnet for payment of invoices on Request Network in our dApp.
 
 ### DragonSwap - Pooled bounty
 TODO
 
 ### Worldcoin - Best Use of World ID 
-TODO
+We use Worldcoin World ID for preventing sybill and spam attacks, to ensure a more fair and robust reputation system.
 
 ### Zircuit - Best Project on Zircuit
-TODO
+We deployed our NFT contracts on Zircuit as well.
 
 ### ENS - Best use of ENS
 TODO
@@ -53,6 +53,9 @@ We initialized the project using Scaffold-ETH 2 with the [SE2 Request Network ex
 
 ### Mantle Network - Best UX/UI project
 TODO
+
+### Optimism
+We deployed our contracts on Optimism Sepolia, because Worldcoin World ID is required for our dApp.
 
 
 ## Links
