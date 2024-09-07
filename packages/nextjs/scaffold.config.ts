@@ -13,10 +13,10 @@ const scaffoldConfig = {
   targetNetworks: [
     // chains.sepolia,
     chains.optimismSepolia,
-    // chains.zircuitTestnet,
-    // chains.mantleSepoliaTestnet,
-    // chains.celoAlfajores,
-    // chains.seiTestnet,
+    chains.zircuitTestnet,
+    chains.mantleSepoliaTestnet,
+    chains.celo,
+    chains.seiTestnet,
   ],
 
   // The interval at which your front-end polls the RPC servers for new data

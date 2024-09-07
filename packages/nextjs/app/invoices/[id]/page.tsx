@@ -283,13 +283,13 @@ const InvoiceDetails: React.FC = () => {
       )}
 
       {/* Pay Now Button */}
-      {/* {(invoiceData.state === "Created" || invoiceData.state === "Pending") && invoiceData.to === address && ( */}
+      {(invoiceData.state === "Created" || invoiceData.state === "Pending") && invoiceData.to === address && (
       <div className="text-right">
         <button className="bg-secondary text-primary-content py-2 px-4 rounded" disabled={pending} onClick={payInvoice}>
           Pay now 💸
         </button>
       </div>
-      {/* )} */}
+      )}
     </div>
   );
 };
