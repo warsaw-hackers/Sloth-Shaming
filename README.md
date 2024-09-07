@@ -81,16 +81,16 @@ Our dapp fully supports ENS names, and users are able to search and interact wit
 
 ## Links
 
-- (Devfolio)[https://devfolio.co/projects/sloth-shaming-bea7]
-- (Vercel)[https://sloths-warsaw.vercel.app/]
-- (Github)[https://github.com/warsaw-hackers/Sloth-Shaming]
+- [Devfolio](https://devfolio.co/projects/sloth-shaming-bea7)
+- [Vercel](ttps://sloths-warsaw.vercel.app/)
+- [Github](https://github.com/warsaw-hackers/Sloth-Shaming)
 
 ### Deployments
-- (Deployment Celo)[https://explorer.celo.org/alfajores/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF]
-- (Deployment Sei)[https://seitrace.com/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?chain=pacific-1]
-- (Deployment Zircuit)[https://explorer.testnet.zircuit.com/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF]
-- (Deployment Mantle)[https://explorer.sepolia.mantle.xyz/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?tab=txs]
-- (Deployment Optimism)[https://sepolia-optimism.etherscan.io/address/0xBf8C8Ef202C8D14f8657f6E476c0F115906c773D]
+- [Deployment Celo](https://explorer.celo.org/alfajores/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF)
+- [Deployment Sei](https://seitrace.com/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?chain=pacific-1)
+- [Deployment Zircuit](https://explorer.testnet.zircuit.com/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF)
+- [Deployment Mantle](https://explorer.sepolia.mantle.xyz/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?tab=txs)
+- [Deployment Optimism](https://sepolia-optimism.etherscan.io/address/0xBf8C8Ef202C8D14f8657f6E476c0F115906c773D)
 
 
 
