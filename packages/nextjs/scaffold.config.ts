@@ -11,8 +11,8 @@ export type ScaffoldConfig = {
 const scaffoldConfig = {
   // The networks on which your DApp is live
   targetNetworks: [
-    chains.sepolia,
-    chains.baseSepolia,
+    // chains.sepolia,
+    chains.optimismSepolia,
     // chains.zircuitTestnet,
     // chains.mantleSepoliaTestnet,
     // chains.celoAlfajores,
