@@ -15,6 +15,7 @@ const Dashboard: React.FC = () => {
   const [totalRequestHistory, setTotalRequestHistory] = useState<Types.IRequestDataWithEvents[] | undefined>();
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(null);
 
+
   useEffect(() => {
     if (walletClient) {
       initializeRequestNetwork(setRequestNetwork, walletClient);
@@ -35,10 +36,9 @@ const Dashboard: React.FC = () => {
         console.error("Failed to fetch request history:", error);
       });
   }, [address, requestNetwork]);
-
   const filterRequests = (tab: "All" | "Pay" | "Get Paid") => {
     if (!totalRequestHistory) return [];
-    
+
     return totalRequestHistory.filter(request => {
       if (!request) return false;
       const status = calculateStatus(
