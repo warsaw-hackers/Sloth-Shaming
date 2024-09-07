@@ -1,15 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-
-import {
-  IDKitWidget
-} from "@worldcoin/idkit";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { fetchNFTData } from "../page";
+import { useQuery } from "@tanstack/react-query";
+import { IDKitWidget, VerificationLevel } from "@worldcoin/idkit";
 import { useTheme } from "next-themes";
-import { useScaffoldWriteContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { decodeAbiParameters, parseAbiParameters } from "viem";
 import { useAccount } from "wagmi";
-import {VerificationLevel} from "@worldcoin/idkit";
+import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 const Mint: React.FC = () => {
   const { address } = useAccount();
@@ -21,15 +20,31 @@ const Mint: React.FC = () => {
   const { data: nftId, isLoading } = useScaffoldReadContract({
     contractName: "SlothShaming",
     functionName: "idOf",
-    args: [address]
+    args: [address],
   });
 
+  // const { data: nftUri, isLoading: isLoadingUri } = useScaffoldReadContract({
+  //   contractName: "SlothShaming",
+  //   functionName: "tokenURI",
+  //   args: [nftId],
+  // });
 
-  const { data: nftUri, isLoading: isLoadingUri } = useScaffoldReadContract({
-    contractName: "SlothShaming",
-    functionName: "tokenURI",
-    args: [nftId]
+  const {
+    data: nftData,
+    refetch: refetchNFTuri,
+    isFetching: isFetchingNFTData,
+  } = useQuery({
+    queryKey: ["customData", Number(nftId ?? 0)],
+    queryFn: () => fetchNFTData(Number(nftId ?? 0)),
+    enabled: typeof nftId == "bigint" ? true : false,
   });
+  console.log("🚀 ~ nftData:", nftData);
+
+  useEffect(() => {
+    if (nftId) {
+      refetchNFTuri();
+    }
+  }, [nftId]);
 
   // Descriptive variables
   const hasMintedNFT = nftId !== 0n && !isLoading;
@@ -59,7 +74,7 @@ const Mint: React.FC = () => {
     });
   };
   return (
-    <div className="container mx-auto p-8">
+    <div className="container mx-auto p-8 text-white tracking-tighter">
       <h1 className="text-center mb-4 mt-5">
         <span className="block text-4xl font-bold">Register your reputation</span>
       </h1>
@@ -90,7 +105,6 @@ const Mint: React.FC = () => {
             <p>Powered by: </p>
             <div>
               {isDarkMode ? (
-
                 <img src="/Worldcoin-logo-lockup-light.svg" alt="Worldcoin Logo" className="w-200" />
               ) : (
                 <img src="/Worldcoin-logo-lockup-dark.svg" alt="Worldcoin Logo" className="w-200" />
@@ -105,7 +119,6 @@ const Mint: React.FC = () => {
             <p>Powered by: </p>
             <div>
               {isDarkMode ? (
-
                 <img src="/Worldcoin-logo-lockup-light.svg" alt="Worldcoin Logo" className="w-200" />
               ) : (
                 <img src="/Worldcoin-logo-lockup-dark.svg" alt="Worldcoin Logo" className="w-200" />
@@ -123,9 +136,11 @@ const Mint: React.FC = () => {
             </div>
             <div className="flex flex-col space-y-4">
               <div className="flex flex-col items-center mt-4">
-                <button className="btn btn-primary" 
-                  disabled={!proof} 
-                  onClick={handleMint}>
+                <button
+                  className="btn btn-primary"
+                  // disabled={!proof}
+                  onClick={handleMint}
+                >
                   Mint
                 </button>
               </div>
@@ -133,17 +148,36 @@ const Mint: React.FC = () => {
           </div>
         )}
 
-
         {hasMintedNFT && (
           <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-8 m-8">
             <div className="flex flex-col text-center mb-4">
               <span className="text-2xl font-semibold">Your reputation NFT</span>
             </div>
-            <div className="flex justify-center items-center">
-            <img src="/placeholder.jpeg" alt="Sloth" className="w-200" />
-
+            <div className="flex justify-center items-center content-center">
+              <Image
+                src={`/assets/${nftData?.animalData ? nftData.animalData.name.toLowerCase() : "sloth"}.svg`}
+                height={200}
+                width={200}
+                className="ml-4"
+                alt="home-page"
+              />
             </div>
-            <p>Token URI: {nftUri}</p>
+            <div className="flex justify-between mt-4">
+              <div className="text-white tracking-tighter justify-center flex flex-col gap-0 -space-y-2">
+                {/* <p>Rank: {nftData?.animalData.name ? nftData.animalData.name : "Sloth"}</p>  */}
+                <p>Rating: {nftData?.rating ? nftData.rating : 0}/100 </p>
+              </div>
+              <ul className="text-white tracking-tighter justify-end items-start flex flex-col gap-0 space-y-0">
+                {nftData &&
+                  nftData.animalData?.attributes?.map((attr: any) => {
+                    return (
+                      <li>
+                        {attr.trait_type} : {attr.value}
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
           </div>
         )}
       </div>

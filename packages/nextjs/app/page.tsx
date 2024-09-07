@@ -12,7 +12,7 @@ import { usePinataRetrieveData } from "~~/hooks/usePinataRetrieveData";
 import { truncateAddress } from "~~/utils";
 import { handleTweet } from "~~/utils/twitter";
 
-async function fetchNFTData(id: number) {
+export async function fetchNFTData(id: number) {
   const response = await fetch(`/api/get-nft/${id}`);
   console.log("🚀 ~ fetchNFTData ~ response:", response);
   if (!response.ok) {
