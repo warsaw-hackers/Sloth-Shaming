@@ -55,6 +55,6 @@ export const returnRating = async (address: string): Promise<number> => {
     return Math.round(averageRating); // Return rounded integer value
   } catch (error) {
     console.error("Failed to calculate rating:", error);
-    return 50; // Return default score in case of an error
+    return 80; // Return default score in case of an error
   }
 };

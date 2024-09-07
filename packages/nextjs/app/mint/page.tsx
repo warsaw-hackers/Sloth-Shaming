@@ -9,6 +9,7 @@ import { useTheme } from "next-themes";
 import { useScaffoldWriteContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { decodeAbiParameters, parseAbiParameters } from "viem";
 import { useAccount } from "wagmi";
+import {VerificationLevel} from "@worldcoin/idkit";
 
 const Mint: React.FC = () => {
   const { address } = useAccount();
@@ -76,7 +77,7 @@ const Mint: React.FC = () => {
             <IDKitWidget
               app_id={process.env.NEXT_PUBLIC_APP_ID as `app_${string}`}
               action={process.env.NEXT_PUBLIC_ACTION_CREATE as string}
-
+              verification_level={VerificationLevel.Device}
               signal={address}
               onSuccess={setProof}
             >
