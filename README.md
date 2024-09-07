@@ -12,7 +12,6 @@
 
 🦥 Sloth Shaming is a platform that allows you to create a profile, receive ratings based on your invoices on Request Network, and wether or not you are paying them on time. Late payers will be named and shamed, and responsible payers will be rewarded with good reputation, and as an effect, have provable credibility.
 
-- ✅ **Register account**: Register an account using metamask.
 - 🩻 **SoulBound**: Upon registration users will receive a soulbound token that represents their profile.
 - ⛓️ **Dynamic NFT**: The associated NFT will be dynamically changed throughout your activity history on request network.
 - 🔎 **Search the Registry**: Search for anyone, using ther ethereum address or ENS name to quickly check their reputation.
@@ -43,22 +42,25 @@ If you find a sloth, there is the possibility to post a roast for this slow paye
 ## Bounties 😎
 
 ### Request Network - Best app that creates requests
-We created a reputation system for to create, query and update reputation on chain. 
+We created a reputation system for to create, query and update reputation for Request Network.
 
 ### BuidlGuidl - Best Scaffold-ETH2 Submission
 We initialized the project using Scaffold-ETH 2 with the [SE2 Request Network extension](https://github.com/arjanjohan/scaffold-request-extension). 
 
 ### Worldcoin - Best Use of World ID 
-We use Worldcoin World ID for preventing sybill and spam attacks, to ensure a more fair and robust reputation system.
+We use Worldcoin World ID for preventing sybil and spam attacks, to ensure a more fair and robust reputation system.
 
 ### Golem
-In order to automatically generate roasts for late payments, we use Golem to run an AI model. These roasts then gets posted to x dot com the everything app.
+Our initial idea was to automatically generate roasts for late payments, we use Golem to run an AI model. These roasts would then get posted to x dot com the everything app. However we ran into some issues with Golem not being compatible with next.js, which we were using for this project. However, we tried [really hard to make it work...](https://github.com/warsaw-hackers/Sloth-Shaming/commit/e3f74e0ccc45d9b1b83b66476b7631af8f66498b)
 
 ### Optimism
 We deployed our contracts on Optimism Sepolia, because Worldcoin World ID is required for our dApp. Also it's possible to pay invoices on Optimism within our dApp. [Deployment](https://sepolia-optimism.etherscan.io/address/0xBf8C8Ef202C8D14f8657f6E476c0F115906c773D)
 
 ### Celo
-Celo is available as a payment Chain on our Request Network dApp. Also, we use Celo Alfojores testnet for for creating a SBT in our registry. [Deployment](https://explorer.celo.org/alfajores/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF)
+Celo is available as a payment Chain on our Request Network dApp. Also, we use Celo Alfojores testnet for for creating a SBT in our registry.
+- [Deployment](https://explorer.celo.org/alfajores/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF)
+- [Paid Celo invoice](https://sloths-warsaw.vercel.app/invoices/0123e861a13322a50473ca4c85d4204e08b8a00081441f5e324b6458135900d88f)
+- [Mainnet payment transaction](https://celoscan.io/tx/0x8350439b3e0ad78e1cba71f6d1d2d828b18adc39545a82b449045154e96deeba)
 
 ### DragonSwap - Pooled bounty
 We use Sei network for for creating a SBT in our registry. [Deployment](https://seitrace.com/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?chain=pacific-1)
@@ -78,12 +80,11 @@ Our dapp fully supports ENS names, and users are able to search and interact wit
 
 ## Links
 
-- https://explorer.celo.org/alfajores/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF
-- https://seitrace.com/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?chain=pacific-1
-- https://explorer.testnet.zircuit.com/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF
-- https://explorer.sepolia.mantle.xyz/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?tab=txs
-- https://sepolia-optimism.etherscan.io/address/0xBf8C8Ef202C8D14f8657f6E476c0F115906c773D
-- https://github.com/arjanjohan/scaffold-request-extension
+- (Deployment Celo)[https://explorer.celo.org/alfajores/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF]
+- (Deployment Sei)[https://seitrace.com/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?chain=pacific-1]
+- (Deployment Zircuit)[https://explorer.testnet.zircuit.com/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF]
+- (Deployment Mantle)[https://explorer.sepolia.mantle.xyz/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?tab=txs]
+- (Deployment Optimism)[https://sepolia-optimism.etherscan.io/address/0xBf8C8Ef202C8D14f8657f6E476c0F115906c773D]
 
 
 ## Team
