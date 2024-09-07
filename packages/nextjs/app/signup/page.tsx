@@ -6,18 +6,18 @@ import { run } from "~~/utils/golem";
 export default function Home() {
   const [results, setResults] = useState<string[]>([]);
   const [formData, setFormData] = useState({
-    yagnaAppKey: "try_golem",
+    yagnaAppKey: "d3f587d6c9d64fcfbb1e54bbd61baca1",
     yagnaApiBasePath: "",
     subnetTag: "",
-    imageTag: "",
+    imageHash: "23ac8d8f54623ad414d70392e4e3b96da177911b0143339819ec1433",
     paymentNetwork: "",
   });
 
   useEffect(() => {
     // This line allows you to watch golem-js internal logs in the browser console!
-    if (typeof window !== "undefined") {
-      localStorage.debug = "golem-js:*";
-    }
+    // if (typeof window !== "undefined") {
+    //   localStorage.debug = "golem-js:*";
+    // }
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,13 +30,17 @@ export default function Home() {
       alert("You didn't provide your Yagna AppKey");
       return;
     }
+    if (!formData.imageHash) {
+      alert("You didn't provide your Yagna AppKey");
+      return;
+    }
 
     await run(
       {
         key: formData.yagnaAppKey,
         url: formData.yagnaApiBasePath,
         subnetTag: formData.subnetTag,
-        imageTag: formData.imageTag,
+        imageHash: formData.imageHash,
         network: formData.paymentNetwork,
       },
       result => {
@@ -55,7 +59,7 @@ export default function Home() {
         placeholder="Yagna API Base Path"
       />
       <input id="subnetTag" value={formData.subnetTag} onChange={handleInputChange} placeholder="Subnet Tag" />
-      <input id="imageTag" value={formData.imageTag} onChange={handleInputChange} placeholder="Image Tag" />
+      <input id="imageTag" value={formData.imageHash} onChange={handleInputChange} placeholder="Image Tag" />
       <input
         id="paymentNetwork"
         value={formData.paymentNetwork}

@@ -1,3 +1,4 @@
+import { NextRequest, NextResponse } from "next/server";
 import { GolemNetwork, waitFor } from "@golem-sdk/golem-js";
 
 interface RunParams {
@@ -16,17 +17,15 @@ const splitMultiline = (multiLineStr: string) => {
 
 const myProposalFilter = (proposal: any) => {
   /*
-// This filter can be used to engage a provider we used previously.
-// It should have the image cached so the deployment will be faster.
- if (proposal.provider.name == "<enter provider name here>") return true;
- else return false;
-*/
+  // This filter can be used to engage a provider we used previously.
+  // It should have the image cached so the deployment will be faster.
+   if (proposal.provider.name == "<enter provider name here>") return true;
+   else return false;
+  */
   return true;
 };
 
-export async function run(params: RunParams, appendResults: (result: string) => void) {
-  const { key, url, subnetTag, imageHash } = params;
-
+export async function run() {
   const controller = new AbortController();
 
   //@ts-ignore
@@ -34,17 +33,16 @@ export async function run(params: RunParams, appendResults: (result: string) => 
   let rental = null;
   let isShuttingDown = 0;
   let serverOnProviderReady = false;
-  console.log("🚀 ~ run ~ imageHash:", imageHash);
 
   const order = {
     demand: {
       workload: {
-        imageHash,
+        imageHash: "23ac8d8f54623ad414d70392e4e3b96da177911b0143339819ec1433",
         minMemGib: 8,
         // capabilities: ["!exp:gpu", "vpn"],
         // engine: "vm-nvidia",
       },
-      subnetTag,
+      subnetTag: "",
     },
     market: {
       rentHours: 0.5,
@@ -58,13 +56,13 @@ export async function run(params: RunParams, appendResults: (result: string) => 
   };
 
   const glm = new GolemNetwork({
-    api: { key, url },
+    api: { key: "d3f587d6c9d64fcfbb1e54bbd61baca1", url: "" },
   });
 
-  glm.payment.events.on("invoiceAccepted", ({ invoice }) => appendResults(`Total cost: ${invoice.amount} GLM`));
+  glm.payment.events.on("invoiceAccepted", ({ invoice }) => console.log(`Total cost: ${invoice.amount} GLM`));
 
   try {
-    appendResults("Establishing a connection to the Golem Network");
+    console.log("Establishing a connection to the Golem Network");
     await glm.connect();
 
     process.on("SIGINT", async function () {
@@ -85,7 +83,7 @@ export async function run(params: RunParams, appendResults: (result: string) => 
     });
     const network = await glm.createNetwork();
     // const network = await glm.createNetwork();
-    appendResults("Request for renting a provider machine");
+    console.log("Request for renting a provider machine");
 
     //@ts-ignore
     order.network = network;
@@ -94,11 +92,11 @@ export async function run(params: RunParams, appendResults: (result: string) => 
 
     const PORT_ON_PROVIDER = 11434; // default port
     const PORT_ON_REQUESTOR = 11434; // will use the same outside
-    appendResults(`Rented resources from ${rental.agreement.provider.name}`);
+    console.log(`Rented resources from ${rental.agreement.provider.name}`);
 
     const exe = await rental.getExeUnit();
     // .then(async exe =>
-    //   appendResults(`Reply: ${(await exe.run(`echo 'Hello Golem! 👋 from ${exe.provider.name}!'`)).stdout}`),
+    //   console.log(`Reply: ${(await exe.run(`echo 'Hello Golem! 👋 from ${exe.provider.name}!'`)).stdout}`),
     // );
     console.log("🚀 ~ run ~ exe:", exe);
 
@@ -129,15 +127,26 @@ export async function run(params: RunParams, appendResults: (result: string) => 
 
     await proxy.listen(PORT_ON_REQUESTOR);
     console.log(`Server Proxy listen at http://localhost:${PORT_ON_REQUESTOR}`); // Keep the process running to the point where the server exits or the execution is aborted
-    appendResults("Finished all work with the resources");
+    console.log("Finished all work with the resources");
 
     await waitFor(() => server.isFinished());
     await rental.stopAndFinalize();
-    appendResults("Finalized renting process");
+    console.log("Finalized renting process");
   } catch (err) {
     console.error("Failed to run the example", err);
-    appendResults(`Error: ${err instanceof Error ? err.message : String(err)}`);
+    console.log(`Error: ${err instanceof Error ? err.message : String(err)}`);
   } finally {
     await glm.disconnect();
+  }
+}
+
+export async function GET(req: NextRequest, context: any) {
+  try {
+    await run();
+    return NextResponse.json({});
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: "Error finding out balance" });
+  } finally {
   }
 }
