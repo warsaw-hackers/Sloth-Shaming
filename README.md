@@ -60,4 +60,4 @@ Our dapp fully supports ENS names, and users are able to search and interact wit
 - [arjanjohan](https://x.com/arjanjohan)
 - [0xjsi.eth](https://x.com/0xjsieth)
 - [nhestrompia.eth](https://x.com/nhestrompia)
-- [0xkash](https://x.com/0xkash)
+- [Maarten](https://x.com/Mdjvanh)
