@@ -103,6 +103,7 @@ const Home: NextPage = () => {
             nftData?.animalData?.name ? removeSpaces(nftData?.animalData?.name).toLowerCase() : "placeholder"
           }.svg`}
           score={nftData ? nftData.rating : null}
+          isLoading={isFetchingNFTData}
         />
 
         <div className="">

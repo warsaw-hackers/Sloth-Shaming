@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { truncateAddress } from "~~/utils";
 import { handleTweet } from "~~/utils/twitter";
 
@@ -7,13 +8,14 @@ interface SearchResultProps {
   address: string;
   imageUrl: string;
   ensName: string;
+  isLoading: boolean;
 }
 
-export function SearchResult({ title, address, score, imageUrl, ensName }: SearchResultProps) {
+export function SearchResult({ title, address, score, imageUrl, ensName, isLoading }: SearchResultProps) {
   return (
     <div className="card w-[600px] h-[450px] z-0 flex gap-8 py-8 px-6 flex-row bg-[#06B089] shadow-xl">
       <div className="card-body flex flex-col justify-between">
-        <h2 className="card-title font-pixel text-[64px] leading-[66px]">{title}</h2>
+        <h2 className="card-title font-pixel text-[64px] leading-[66px]">{isLoading ? "Searching..." : title}</h2>
         <div>
           <div className="flex gap-4 mt-6  justify-center items-center">
             <p className="text-xl">ADDRESS:</p>{" "}
@@ -50,9 +52,30 @@ export function SearchResult({ title, address, score, imageUrl, ensName }: Searc
           </div>
         )}
       </div>
-      <div className="flex flex-col gap-4 justify-center items-center">
-        <figure className="bg-transparent z-50">
-          <img src={imageUrl} alt={title} width={200} height={500} className="z-40 stroke-slate-50 fill-current" />
+      <div className="flex flex-col gap-4 justify-center items-center relative">
+        {isLoading && (
+          <div className="flex flex-col gap-4 relative">
+            <img
+              src="/assets/question-mark1.svg"
+              className={`${isLoading ? "animate-bounce" : ""} mr-8 mt-32`}
+              alt="questionMark1"
+              width={65}
+              height={120}
+            />
+
+            {/* <img
+              src="/assets/question-mark2.svg"
+              className={`${isLoading ? "animate-bounce" : ""} `}
+              alt="questionMark2"
+              width={55}
+              height={115}
+            /> */}
+          </div>
+        )}
+        <figure className="bg-transparent mt-12 ">
+          {!isLoading && (
+            <Image src={imageUrl} alt={title} width={200} height={500} className="z-40 stroke-slate-50 fill-current" />
+          )}
         </figure>
         {title === "Sloth" && (
           <button
