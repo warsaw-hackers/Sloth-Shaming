@@ -8,13 +8,16 @@ import { IDKitWidget, VerificationLevel } from "@worldcoin/idkit";
 import { useTheme } from "next-themes";
 import { decodeAbiParameters, parseAbiParameters } from "viem";
 import { useAccount } from "wagmi";
+import { getPublicClient } from "wagmi/actions";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { removeSpaces } from "~~/utils";
 
 const Mint: React.FC = () => {
   const { address } = useAccount();
   const [proof, setProof] = useState<string | any>("");
   const { resolvedTheme } = useTheme();
+  const [inProgress, setInProgress] = useState(false);
   const isDarkMode = resolvedTheme === "dark";
   const { writeContractAsync } = useScaffoldWriteContract("SlothShaming");
 
@@ -52,27 +55,45 @@ const Mint: React.FC = () => {
   const isEligibleToMint = nftId === 0n && !isLoading;
 
   const handleMint = async () => {
-    // Dummy proof
-    let transformedProof = {
-      root: BigInt(0),
-      signal: "0x0000000000000000000000000000000000000000",
-      nullifierHash: BigInt(0),
-      proof: Array(8).fill(BigInt(0)),
-    };
-
-    // If the proof is available, use it.
-    if (proof) {
-      transformedProof = {
-        root: BigInt(proof!.merkle_root),
-        signal: address,
-        nullifierHash: BigInt(proof!.nullifier_hash),
-        proof: decodeAbiParameters(parseAbiParameters("uint256[8]"), proof!.proof as `0x${string}`)[0],
+    setInProgress(true);
+    try {
+      // Dummy proof
+      let transformedProof = {
+        root: BigInt(0),
+        signal: "0x0000000000000000000000000000000000000000",
+        nullifierHash: BigInt(0),
+        proof: Array(8).fill(BigInt(0)),
       };
+
+      // If the proof is available, use it.
+      if (proof) {
+        transformedProof = {
+          root: BigInt(proof!.merkle_root),
+          //@ts-ignore
+          signal: address,
+          nullifierHash: BigInt(proof!.nullifier_hash),
+          //@ts-ignore
+          proof: decodeAbiParameters(parseAbiParameters("uint256[8]"), proof!.proof as `0x${string}`)[0],
+        };
+      }
+      const tx = await writeContractAsync({
+        functionName: "registerSloth",
+        //@ts-ignore
+        args: [transformedProof],
+      });
+      console.log("🚀 ~ handleMint ~ tx:", tx);
+      const publicClient = getPublicClient(wagmiConfig);
+
+      const transactionReceipt = await publicClient.waitForTransactionReceipt({
+        //@ts-ignore
+        hash: tx! as string,
+        confirmations: 3,
+      });
+
+      setInProgress(false);
+    } catch (error) {
+      setInProgress(false);
     }
-    await writeContractAsync({
-      functionName: "registerSloth",
-      args: [transformedProof],
-    });
   };
   return (
     <div className="container mx-auto p-8  text-white tracking-tighter">
@@ -137,7 +158,12 @@ const Mint: React.FC = () => {
             </div>
             <div className="flex flex-col space-y-4">
               <div className="flex flex-col items-center mt-4">
-                <button className="btn btn-primary" disabled={!proof} onClick={handleMint}>
+                <button
+                  className="btn btn-primary"
+                  disabled={!proof || inProgress}
+                  // disabled={inProgress}
+                  onClick={handleMint}
+                >
                   Mint
                 </button>
               </div>
