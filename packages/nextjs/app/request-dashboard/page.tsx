@@ -23,7 +23,6 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     if (!address || !requestNetwork) return;
-
     requestNetwork
       .fromIdentity({
         type: Types.Identity.TYPE.ETHEREUM_ADDRESS,
