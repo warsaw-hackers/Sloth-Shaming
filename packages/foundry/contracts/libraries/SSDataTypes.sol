@@ -3,7 +3,7 @@ pragma solidity 0.8.26;
 
 /**
  * @title SSDataTypes
- * @author SlothShaming Technical Team
+ * @author https://x.com/0xjsieth
  * @notice Library containing SlothShaming contracts' custom DataTypes
  *
  */

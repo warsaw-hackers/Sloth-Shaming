@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: GPL-3.0
+//SPDX-License-Identifier: AGPL-3.0
 pragma solidity 0.8.26;
 
 /* Solady contracts */
@@ -38,11 +38,8 @@ contract SlothShaming is ERC721, Ownable {
     //   ___/ / /_/ /_/ / /_/  __(__  )
     //  /____/\__/\__,_/\__/\___/____/
 
-    /// @dev The contract's external nullifier hash for notes
-    uint256 internal immutable externalNullifierNote;
-
-    /// @dev The contract's external nullifier hash for votes
-    uint256 internal immutable externalNullifierVote;
+    /// @dev The contract's external nullifier hash for Registry
+    uint256 internal immutable externalNullifierRegistry;
 
     /// @dev The World ID group ID (always 1)
     uint256 internal immutable groupId = 1;
@@ -73,19 +70,17 @@ contract SlothShaming is ERC721, Ownable {
      * @notice
      *  Constructor for Notes contract
      *
-     * @param _useWorldId a boolan if we are using worldcoin id or not
-     * @param _worldId address of worldå
+     * @param _useWorldId a boolean if we are using worldcoin id or not
+     * @param _worldId address of worldId
      * @param _appId worldcoin app id as string
-     * @param _noteId worldcoin action id for note
-     * @param _voteId worldcoin action id for vote
+     * @param _registryId worldcoin action id for registry
      *
      */
     constructor(
         bool _useWorldId,
         address _worldId,
         string memory _appId,
-        string memory _noteId,
-        string memory _voteId
+        string memory _registryId,
     ) {
         // Set the status of worldId usage
         useWordlId = _useWorldId;
@@ -93,14 +88,9 @@ contract SlothShaming is ERC721, Ownable {
         // Instantiate world Id contract for proving
         worldId = IWorldID(_worldId);
 
-        // create nullifier used for notes
-        externalNullifierNote = abi
-            .encodePacked(abi.encodePacked(_appId).hashToField(), _noteId)
-            .hashToField();
-
-        // create nullifier used for votes
-        externalNullifierVote = abi
-            .encodePacked(abi.encodePacked(_appId).hashToField(), _voteId)
+        // create nullifier used for registry
+        externalNullifierRegistry = abi
+            .encodePacked(abi.encodePacked(_appId).hashToField(), _registryId)
             .hashToField();
 
         // Set deployer as owner
@@ -131,7 +121,7 @@ contract SlothShaming is ERC721, Ownable {
         return "Sloth Shaming";
     }
 
-    /* 
+    /**
      * @notice 
      *  Returns the Uniform Resource Identifier (URI) for token `id`.
      *
@@ -150,6 +140,19 @@ contract SlothShaming is ERC721, Ownable {
         revert SSErrors.SLOTHS_CANT_SEND_THEIR_REPUTATION();
     }
 
+    //      ______     __                        __   ______                 __  _
+    //     / ____/  __/ /____  _________  ____ _/ /  / ____/_  ______  _____/ /_(_)___  ____  _____
+    //    / __/ | |/_/ __/ _ \/ ___/ __ \/ __ `/ /  / /_  / / / / __ \/ ___/ __/ / __ \/ __ \/ ___/
+    //   / /____>  </ /_/  __/ /  / / / / /_/ / /  / __/ / /_/ / / / / /__/ /_/ / /_/ / / / (__  )
+    //  /_____/_/|_|\__/\___/_/  /_/ /_/\__,_/_/  /_/    \__,_/_/ /_/\___/\__/_/\____/_/ /_/____/
+
+    /**
+     * @notice
+     *  Allows new users to register their account, gated by WorldID
+     *
+     * @param _proof full proof data type 
+     *
+     */
     function registerSloth(SSDataTypes.WorldIdProof memory _proof) external {
         // if we are using worldId...
         if (useWordlId) {
@@ -159,7 +162,7 @@ contract SlothShaming is ERC721, Ownable {
                 groupId,
                 abi.encodePacked(_proof.signal).hashToField(),
                 _proof.nullifierHash,
-                externalNullifierNote,
+                externalNullifierRegistry,
                 _proof.proof
             );
         }
@@ -174,6 +177,14 @@ contract SlothShaming is ERC721, Ownable {
         currentId++;
     }
 
+    /**
+     * @notice
+     *  For emergencies, allows the deployer to switch the uri base link in case it is needed in order to
+     *  not fuck up the contract perpetually in case a server goes down or something
+     *
+     * @param _newBaseUri a string of the new base uri link
+     *
+     */
     function resetBaseUri(string memory _newBaseUri) external onlyOwner {
         baseUri = _newBaseUri;
     }
