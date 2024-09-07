@@ -780,7 +780,7 @@ export async function GET(req: NextRequest, context: any) {
   });
 
   const data = await publicClient.readContract({
-    address: "0x2b39455e2ecbe95a636e53780df64e0bf559ba61",
+    address: SlothShaming.address,
     abi: SlothShaming.abi,
     functionName: "ownerOf",
     args: [params.id],
