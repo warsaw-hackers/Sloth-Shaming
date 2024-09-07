@@ -77,7 +77,7 @@ export function SearchResult({ title, address, score, imageUrl, ensName, isLoadi
             <Image src={imageUrl} alt={title} width={200} height={500} className="z-40 stroke-slate-50 fill-current" />
           )}
         </figure>
-        {title === "Sloth" && (
+        {title === "Slow Sloth" && (
           <button
             className="btn mt-4 bg-[#FE8731] hover:bg-[#E16811] border-none text-white"
             onClick={() => {
