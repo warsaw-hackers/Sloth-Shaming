@@ -55,7 +55,7 @@ const Mint: React.FC = () => {
     }
     await writeContractAsync({
       functionName: "registerSloth",
-      args: [proof],
+      args: [transformedProof],
     });
   };
   return (
