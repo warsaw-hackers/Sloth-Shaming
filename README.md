@@ -20,6 +20,18 @@
 
 ![Landing page](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
 
+## Ratings
+
+Each time the uri is called, a calculation is being made in order to mark the holder as one of the following titles.
+
+The formula for calculating the rating made like this: We loop through all the invoices sent to the SBT holder. From this we will generate a series of numbers to the holder. Each payment made on time will push the number 100 to the list, and each payment that is too late the number 0 gets pushed to the list. From there an avarage number of the numbers in the list is calculated resulting in the following titles:
+
+### Slow Sloth 0-70
+
+### Neutral Wolf 70-90
+
+### Speedy Cheetah 90-100
+
 ## Bounties 😎
 
 ### Request Network - Best app that creates requests
