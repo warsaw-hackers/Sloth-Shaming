@@ -8,5 +8,6 @@ contract PrintWallet is Script {
 
     function run() external view {
         console.log(wallet);
+        console.log(wallet.balance);
     }
 }
