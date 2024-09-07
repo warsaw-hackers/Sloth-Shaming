@@ -26,11 +26,19 @@ Each time the uri is called, a calculation is being made in order to mark the ho
 
 The formula for calculating the rating made like this: We loop through all the invoices sent to the SBT holder. From this we will generate a series of numbers to the holder. Each payment made on time will push the number 100 to the list, and each payment that is too late the number 0 gets pushed to the list. From there an avarage number of the numbers in the list is calculated resulting in the following titles:
 
-### Slow Sloth 0-70
+|     Slow Sloth 0-70 points     |  Neutral Wolf 70-90 points  |    Speedy Cheetah 90-100 points    |
+|--------------------------------|-----------------------------|------------------------------------|
+| ![Sloth](assets/SlothChar.svg) |![Wolf](assets/WolfChar.svg) | ![Cheetah](assets/CheetahChar.svg) |
 
-### Neutral Wolf 70-90
 
-### Speedy Cheetah 90-100
+If you find a sloth, there is the possibility to post a roast for this slow payee on x dot com the everything app in a single click
+
+## Diagrams
+### Create NFT
+![Create Nft](assets/create_nft.png)
+
+### Display NFT
+![Display nft](assets/display_nft.png)
 
 ## Bounties 😎
 
