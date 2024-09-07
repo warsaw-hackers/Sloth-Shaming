@@ -793,7 +793,7 @@ export async function GET(req: NextRequest, context: any) {
   let rating = await returnRating(data);
   let animalName = "";
   switch (true) {
-    case rating < :
+    case rating < 70:
       animalName = "sloth";
     case rating >= 70 && rating < 90:
       animalName = "wolf";
