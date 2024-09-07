@@ -35,10 +35,10 @@ We use Worldcoin World ID for preventing sybill and spam attacks, to ensure a mo
 In order to automatically generate roasts for late payments, we use Golem to run an AI model. These roasts then gets posted to x dot com the everything app.
 
 ### Optimism
-We deployed our contracts on Optimism Sepolia, because Worldcoin World ID is required for our dApp.
+We deployed our contracts on Optimism Sepolia, because Worldcoin World ID is required for our dApp. Also it's possible to pay invoices on Optimism within our dApp.
 
 ### Celo
-We use Celo Alfojores testnet for for creating a SBT in our registry. 
+Celo is available as a payment Chain on our Request Network dApp. Also, we use Celo Alfojores testnet for for creating a SBT in our registry. 
 
 ### DragonSwap - Pooled bounty
 We use Sei network for for creating a SBT in our registry. 
@@ -47,10 +47,14 @@ We use Sei network for for creating a SBT in our registry.
 We use Zircuit testnet for for creating a SBT in our registry. 
 
 ### Mantle Network - Best UX/UI project
-We use mantle testnet for for creating a SBT in our registry. 
+Mantle is available as a payment Chain on our Request Network dApp. Also, we use mantle testnet for for creating a SBT in our registry. 
 
 ### ENS - Best use of ENS
 Our dapp fully supports ENS names, and users are able to search and interact with others using their ENS name as well as their wallet address. 
+
+## Next steps
+
+- TODO
 
 ## Links
 
