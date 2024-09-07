@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-
-import { RequestNetwork, Types } from "@requestnetwork/request-client.js";
 import { initializeRequestNetworkDummy } from "./initializeDummyRN";
+import { Types } from "@requestnetwork/request-client.js";
 
 export const returnRating = async (address: string): Promise<number> => {
-  const requestNetwork = initializeRequestNetworkDummy();
+  const requestNetwork = initializeRequestNetworkDummy()?.requestNetwork;
   console.log("Request Network initialized:", requestNetwork);
   if (!requestNetwork) {
     return 50; // Default score if Request Network is not initialized
@@ -57,6 +55,6 @@ export const returnRating = async (address: string): Promise<number> => {
     return Math.round(averageRating); // Return rounded integer value
   } catch (error) {
     console.error("Failed to calculate rating:", error);
-    return 50; // Return default score in case of an error
+    return 80; // Return default score in case of an error
   }
 };

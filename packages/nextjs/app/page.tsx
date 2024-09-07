@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import type { NextPage } from "next";
 import { useDebounce } from "react-use";
 import { isAddress } from "viem";
@@ -81,6 +82,7 @@ const Home: NextPage = () => {
               className="input focus:border-0 w-full max-w-xs placeholder:text-white "
             />
           </label> */}
+        <Image src={"/assets/homepage-sloth.svg"} height={200} width={200} alt="home-page" />
         <div className="flex gap-4 justify-center items-center">
           <AddressInput onChange={setValue} value={value} placeholder="Input your address" />
           <button className="btn btn-primary" onClick={() => setIsSearchClick(true)}>
