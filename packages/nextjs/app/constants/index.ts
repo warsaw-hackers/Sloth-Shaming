@@ -1,7 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
-
-export const dynamic = "force-dynamic";
-
 const ANIMALS = [
   {
     name: "Sloth",
@@ -84,22 +80,3 @@ const ANIMALS = [
     image: "https://lavender-manual-goat-205.mypinata.cloud/ipfs/QmdymxLzqyNtNBWRwHtxvLrqx2QvSSpN9CKRkETW4WtBrZ",
   },
 ];
-
-export async function GET(req: NextRequest, context: any) {
-  const { params } = context;
-  console.log("🚀 ~ GET ~ params:", params);
-  // const walletAddress = params.walletAddress;
-
-  if (!params.id) {
-    return new NextResponse("No nft id provided", { status: 400 });
-  }
-  let animalName = "sloth";
-  const animalData =
-    ANIMALS.find(animal => animal.name.toLowerCase() === animalName.toLowerCase()) || "Animal not found";
-  try {
-    return NextResponse.json({ animalData });
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({ message: "Error checking wallet" });
-  }
-}

@@ -5,6 +5,8 @@ import type { NextPage } from "next";
 import { useDebounce } from "react-use";
 import { isAddress } from "viem";
 import { useAccount } from "wagmi";
+import { AddressInput } from "~~/components/scaffold-eth";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { usePinataRetrieveData } from "~~/hooks/usePinataRetrieveData";
 
 const Home: NextPage = () => {
@@ -23,8 +25,28 @@ const Home: NextPage = () => {
     [value],
   );
   const [cid, setCid] = useState("QmdymxLzqyNtNBWRwHtxvLrqx2QvSSpN9CKRkETW4WtBrZ");
-  const { data, isFetching } = usePinataRetrieveData(cid, value!, isSearchClick);
+  const { data: balance, refetch: refetchUserNft } = useScaffoldReadContract({
+    contractName: "SlothShaming",
+    functionName: "idOf",
+    args: [value],
+  });
+  const { data: nftUri, refetch: refetchNFTuri } = useScaffoldReadContract({
+    contractName: "SlothShaming",
+    functionName: "tokenURI",
+    args: [balance],
+  });
+  const { data, isFetching } = usePinataRetrieveData(nftUri!, value!, isSearchClick);
   console.log("data", data);
+
+  useEffect(() => {
+    refetchUserNft();
+  }, [isSearchClick]);
+
+  useEffect(() => {
+    if (balance) {
+      refetchNFTuri();
+    }
+  }, [balance]);
 
   useEffect(() => {
     if (value) {
@@ -35,9 +57,8 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="flex gap-4">
-          <label className="input input-bordered flex items-center gap-2">
+      <div className="flex items-center flex-col flex-grow pt-10 text-white">
+        {/* <label className="input input-bordered flex items-center gap-2">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M19 12C19 12.5523 18.5523 13 18 13C17.4477 13 17 12.5523 17 12C17 11.4477 17.4477 11 18 11C18.5523 11 19 11.4477 19 12Z"
@@ -59,8 +80,10 @@ const Home: NextPage = () => {
               placeholder="Enter Wallet Address"
               className="input focus:border-0 w-full max-w-xs placeholder:text-white "
             />
-          </label>
-          <button disabled={!isValidAddress} className="btn btn-primary">
+          </label> */}
+        <div className="flex gap-4 justify-center items-center">
+          <AddressInput onChange={setValue} value={value} placeholder="Input your address" />
+          <button className="btn btn-primary" onClick={() => setIsSearchClick(true)}>
             Search
           </button>
         </div>
