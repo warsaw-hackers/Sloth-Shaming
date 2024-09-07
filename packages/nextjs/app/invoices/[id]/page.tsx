@@ -2,20 +2,24 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { approveErc20, hasErc20Approval, hasSufficientFunds, payRequest } from "@requestnetwork/payment-processor";
 import { RequestNetwork } from "@requestnetwork/request-client.js";
 import { formatUnits } from "viem";
 import { useAccount, useWalletClient } from "wagmi";
-import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { useEthersSigner } from "~~/utils/request/ethersAdapter";
 import { calculateStatus, displayOrder, findCurrency, keyLabelMapping } from "~~/utils/request/helper";
 import { initializeRequestNetwork } from "~~/utils/request/initializeRN";
 
 const InvoiceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+
   const invoiceid = id;
-  const contractName = "ERC20FeeProxy";
-  const { writeContract, isPending } = useScaffoldWriteContract(contractName);
-  const { address } = useAccount();
+  const [pending, setPending] = useState(false);
+  const { address, chain } = useAccount();
   const { data: walletClient } = useWalletClient();
+  // const ethers_signer = walletClientToSigner(walletClient);
+  const signer = useEthersSigner({ chainId: chain?.id });
+  console.log("provider", signer);
 
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(null);
   const [request, setRequest] = useState<any>(null);
@@ -36,6 +40,7 @@ const InvoiceDetails: React.FC = () => {
         setRequest(invoice);
         if (invoice) {
           const data = await invoice.getData();
+          console.log("data", data);
           const content = data.contentData;
 
           const from = data.payee?.value ?? "Unknown";
@@ -133,7 +138,6 @@ const InvoiceDetails: React.FC = () => {
       });
       return <>{elements}</>;
     };
-    console.log("details", details);
     if (
       !details ||
       (Object.keys(details).length === 1 && Object.keys(details.address || {}).length === 0) ||
@@ -145,24 +149,36 @@ const InvoiceDetails: React.FC = () => {
   };
 
   const payInvoice = async () => {
+    if (!address || !request || !signer) return;
+    setPending(true);
+
     const data = await request.getData();
-    const currency = data.currencyInfo.value;
-    const amount = BigInt(data.expectedAmount);
-    const receiver = data.payee.value;
 
     try {
-      console.log("Sending request...");
-      await writeContract({
-        functionName: "transferFromWithReferenceAndFee",
-        args: [currency, receiver, amount, data, 0n, "0x399F5EE127ce7432E4921a61b8CF52b0af52cbfE"],
+      const sufficientFunds = hasSufficientFunds({
+        request: data,
+        address,
+        providerOptions: { provider: signer.provider },
       });
+      if (!sufficientFunds) {
+        console.error("Insufficient funds");
+        return;
+      }
 
-      console.log("Request sent!");
+      const approved = await hasErc20Approval(data, address, signer);
+      if (!approved) {
+        console.log("Approval not set, requesting approval...");
+        await approveErc20(request);
+        console.log("Approval granted!");
+      }
+
+      console.log("Paying request...");
+      await payRequest(data, signer);
+      console.log("Request paid!");
     } catch (error) {
-      console.error("Error sending request: ", error);
+      console.error("Error paying request: ", error);
     }
-
-    console.log("paying invoice");
+    setPending(false);
   };
 
   return (
@@ -267,17 +283,13 @@ const InvoiceDetails: React.FC = () => {
       )}
 
       {/* Pay Now Button */}
-      {(invoiceData.state === "Created" || invoiceData.state === "Pending") && invoiceData.to === address && (
-        <div className="text-right">
-          <button
-            className="bg-secondary text-primary-content py-2 px-4 rounded"
-            disabled={isPending}
-            onClick={payInvoice}
-          >
-            Pay now 💸
-          </button>
-        </div>
-      )}
+      {/* {(invoiceData.state === "Created" || invoiceData.state === "Pending") && invoiceData.to === address && ( */}
+      <div className="text-right">
+        <button className="bg-secondary text-primary-content py-2 px-4 rounded" disabled={pending} onClick={payInvoice}>
+          Pay now 💸
+        </button>
+      </div>
+      {/* )} */}
     </div>
   );
 };

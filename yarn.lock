@@ -1440,7 +1440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/sourcemap-codec@npm:^1.4.10, @jridgewell/sourcemap-codec@npm:^1.4.14":
+"@jridgewell/sourcemap-codec@npm:^1.4.10, @jridgewell/sourcemap-codec@npm:^1.4.14, @jridgewell/sourcemap-codec@npm:^1.5.0":
   version: 1.5.0
   resolution: "@jridgewell/sourcemap-codec@npm:1.5.0"
   checksum: 05df4f2538b3b0f998ea4c1cd34574d0feba216fa5d4ccaef0187d12abf82eafe6021cec8b49f9bb4d90f2ba4582ccc581e72986a5fcf4176ae0cfeb04cf52ec
@@ -2375,6 +2375,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@requestnetwork/advanced-logic@npm:0.44.0":
+  version: 0.44.0
+  resolution: "@requestnetwork/advanced-logic@npm:0.44.0"
+  dependencies:
+    "@requestnetwork/currency": 0.18.0
+    "@requestnetwork/types": 0.45.0
+    "@requestnetwork/utils": 0.45.0
+    tslib: 2.5.0
+  checksum: 1e61f3e81ea957c8d107ab91f8fa08e7926ea6657fca173e42704cb0a3fb641591b3e79f431d68df6ecea1c33bc343898f7dc4d33707b56f766cb17fd5aef8b4
+  languageName: node
+  linkType: hard
+
 "@requestnetwork/create-invoice-form@npm:^0.7.0":
   version: 0.7.0
   resolution: "@requestnetwork/create-invoice-form@npm:0.7.0"
@@ -2399,6 +2411,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@requestnetwork/currency@npm:0.18.0":
+  version: 0.18.0
+  resolution: "@requestnetwork/currency@npm:0.18.0"
+  dependencies:
+    "@metamask/contract-metadata": 1.31.0
+    "@requestnetwork/types": 0.45.0
+    "@requestnetwork/utils": 0.45.0
+    multicoin-address-validator: 0.5.15
+    node-dijkstra: 2.5.0
+    tslib: 2.5.0
+  checksum: 890b9bba8d2606f4a47aeb12610f849f530ae7956a279d1edf852ba04395de33ad30325bd1293fad5c4dac090f4141cccdf74f316a8ecc21bd6f473c37da2ced
+  languageName: node
+  linkType: hard
+
 "@requestnetwork/data-access@npm:0.34.1-next.2043+d9feda6f":
   version: 0.34.1-next.2043
   resolution: "@requestnetwork/data-access@npm:0.34.1-next.2043"
@@ -2408,6 +2434,18 @@ __metadata:
     "@requestnetwork/utils": 0.43.1-next.2043+d9feda6f
     tslib: 2.5.0
   checksum: d6a49b80b062dddf9512a1b29f2578b23ef1290d9400343fae06d5a4ca08d4d9ffedd16caad29abab4edd81d6ac2873199aca7164bc4dbfeee069f67d858a000
+  languageName: node
+  linkType: hard
+
+"@requestnetwork/data-access@npm:0.36.0":
+  version: 0.36.0
+  resolution: "@requestnetwork/data-access@npm:0.36.0"
+  dependencies:
+    "@requestnetwork/multi-format": 0.19.0
+    "@requestnetwork/types": 0.45.0
+    "@requestnetwork/utils": 0.45.0
+    tslib: 2.5.0
+  checksum: 31562658b0f2b945c8d8613719466adf7ba2840c8b1a917dd404353d4db66230a401cfefb8997c510b16eae619deace9d3a2bc889c72579892f84f5156b3f122
   languageName: node
   linkType: hard
 
@@ -2422,6 +2460,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@requestnetwork/data-format@npm:0.19.0":
+  version: 0.19.0
+  resolution: "@requestnetwork/data-format@npm:0.19.0"
+  dependencies:
+    ajv: 6.12.4
+    ethers: 5.5.1
+    tslib: 2.5.0
+  checksum: 933c349471a1d8228f0b1d398dc216f9377b675e55520a2ff086e2e9fe7a67007b58d182796ce21fa8aca7e7b6bd2adb0cae7baf1153a8f43fff39717bc40654
+  languageName: node
+  linkType: hard
+
 "@requestnetwork/epk-signature@npm:0.7.1-next.2043+d9feda6f":
   version: 0.7.1-next.2043
   resolution: "@requestnetwork/epk-signature@npm:0.7.1-next.2043"
@@ -2433,9 +2482,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@requestnetwork/invoice-dashboard@npm:^0.6.0":
-  version: 0.6.1
-  resolution: "@requestnetwork/invoice-dashboard@npm:0.6.1"
+"@requestnetwork/epk-signature@npm:0.9.0":
+  version: 0.9.0
+  resolution: "@requestnetwork/epk-signature@npm:0.9.0"
+  dependencies:
+    "@requestnetwork/types": 0.45.0
+    "@requestnetwork/utils": 0.45.0
+    tslib: 2.5.0
+  checksum: 84a71666cc0b2d021c0f6d273b873c9b132e281f4fc63bda61bc7dca451405a217ec59c6c1d28b71cd137da85de42eb30834b1bf9cef901c9df7e38e541130f8
+  languageName: node
+  linkType: hard
+
+"@requestnetwork/invoice-dashboard@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@requestnetwork/invoice-dashboard@npm:0.7.0"
   dependencies:
     "@requestnetwork/payment-detection": 0.43.1-next.2043
     "@requestnetwork/payment-processor": 0.45.1-next.2043
@@ -2443,7 +2503,11 @@ __metadata:
     ethers: ^5.7.2
     svelte-sonner: ^0.3.27
     viem: ^2.9.15
-  checksum: 48d8a0dd2ab8a3519bf80926d1da5b87d700abe27ef296948b93f4424d0061d29dbbad59de8f80052cc9a511f5dcf63dc720250d52f8561d2fa5b6eaf5ab7401
+    vite-plugin-node-polyfills: ^0.22.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 0e3862e3c7538e7aa6428b5120ebb376c846e698a234222595a1e482d26eb4ba935fedb7fd7ad325b7afd8d14ca5930a0818780d30826ad2ebfd3a345484dfd8
   languageName: node
   linkType: hard
 
@@ -2454,6 +2518,16 @@ __metadata:
     "@requestnetwork/types": 0.43.1-next.2043+d9feda6f
     tslib: 2.5.0
   checksum: 349fe79eecdba13c2427cef8f8b3c4cff9a409e6f16cc2ee95b10b8ed9bfe227cd03e6831c7ac0b89a2ea02dffa0dcee737d4c835d1538aa3a161392363bc00e
+  languageName: node
+  linkType: hard
+
+"@requestnetwork/multi-format@npm:0.19.0":
+  version: 0.19.0
+  resolution: "@requestnetwork/multi-format@npm:0.19.0"
+  dependencies:
+    "@requestnetwork/types": 0.45.0
+    tslib: 2.5.0
+  checksum: 371d0dc9b37ce441855906afa9d961015f643130091841d71808354e54811beb95978db18b710b44fe1141841bac7b9e14f594603918db0b01748c35f5e9e929
   languageName: node
   linkType: hard
 
@@ -2472,6 +2546,24 @@ __metadata:
     satoshi-bitcoin: 1.0.4
     tslib: 2.5.0
   checksum: 076e2bc1544940f024c8b54cdfae75bcc8666f0bd784ce9d425493f32b1461390d8226fe3669f2b8528886a522c1eb0cdddcaae2d683fafdc5f69988ad31500f
+  languageName: node
+  linkType: hard
+
+"@requestnetwork/payment-detection@npm:0.45.0, @requestnetwork/payment-detection@npm:^0.45.0":
+  version: 0.45.0
+  resolution: "@requestnetwork/payment-detection@npm:0.45.0"
+  dependencies:
+    "@requestnetwork/currency": 0.18.0
+    "@requestnetwork/smart-contracts": 0.38.0
+    "@requestnetwork/types": 0.45.0
+    "@requestnetwork/utils": 0.45.0
+    ethers: 5.5.1
+    graphql: 16.8.1
+    graphql-request: 6.1.0
+    graphql-tag: 2.12.6
+    satoshi-bitcoin: 1.0.4
+    tslib: 2.5.0
+  checksum: 248eb9a3a9755d682da3b2ed14f49a9953c9f01341851cc2efaee95ce70fc645638b955be2d177080a153f702a93a64ad2767623ed9e5fbea716ab3e3cc56bef
   languageName: node
   linkType: hard
 
@@ -2516,6 +2608,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@requestnetwork/request-client.js@npm:^0.49.0":
+  version: 0.49.0
+  resolution: "@requestnetwork/request-client.js@npm:0.49.0"
+  dependencies:
+    "@requestnetwork/advanced-logic": 0.44.0
+    "@requestnetwork/currency": 0.18.0
+    "@requestnetwork/data-access": 0.36.0
+    "@requestnetwork/data-format": 0.19.0
+    "@requestnetwork/epk-signature": 0.9.0
+    "@requestnetwork/multi-format": 0.19.0
+    "@requestnetwork/payment-detection": 0.45.0
+    "@requestnetwork/request-logic": 0.35.0
+    "@requestnetwork/smart-contracts": 0.38.0
+    "@requestnetwork/transaction-manager": 0.36.0
+    "@requestnetwork/types": 0.45.0
+    "@requestnetwork/utils": 0.45.0
+    ethers: 5.5.1
+    qs: 6.11.2
+    tslib: 2.5.0
+  checksum: c5740965c6d5c135d5b815b8e3232d65d0bd28c523c8302f5e7746ebee997c2a1b4d53a09d91270f2bdbeadc430254f7f2850a18569c78e8c5b22fca03814243
+  languageName: node
+  linkType: hard
+
 "@requestnetwork/request-logic@npm:0.33.1-next.2043+d9feda6f":
   version: 0.33.1-next.2043
   resolution: "@requestnetwork/request-logic@npm:0.33.1-next.2043"
@@ -2530,12 +2645,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@requestnetwork/request-logic@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@requestnetwork/request-logic@npm:0.35.0"
+  dependencies:
+    "@requestnetwork/advanced-logic": 0.44.0
+    "@requestnetwork/multi-format": 0.19.0
+    "@requestnetwork/types": 0.45.0
+    "@requestnetwork/utils": 0.45.0
+    semver: 7.5.4
+    tslib: 2.5.0
+  checksum: c5dd0dfcd781be22c98d0bb79559fd4f4a91e1e8c1ab35fd12dfe03f304c271004fff5da7c1f6e1597693750f1aa05162d6d9dad88aac2ef4472ba6a9e828905
+  languageName: node
+  linkType: hard
+
 "@requestnetwork/smart-contracts@npm:0.36.1-next.2043+d9feda6f":
   version: 0.36.1-next.2043
   resolution: "@requestnetwork/smart-contracts@npm:0.36.1-next.2043"
   dependencies:
     tslib: 2.5.0
   checksum: d9527b51117b909328ac6e1748982167961e2dbda97df9751a2b5e760fa0f01a7f90b101f2d53d16137db6d02b2a56b238ab3201833c8514a6a4e10d4ee43ef9
+  languageName: node
+  linkType: hard
+
+"@requestnetwork/smart-contracts@npm:0.38.0":
+  version: 0.38.0
+  resolution: "@requestnetwork/smart-contracts@npm:0.38.0"
+  dependencies:
+    tslib: 2.5.0
+  checksum: d57b009ab52dd7638f4eee3033c56bf61247552c1973328a077ebf4fea3fcb7c0991e550db2bb457dbd0a5be151cab38bc5dd080151362131c3c4471a2815ee0
   languageName: node
   linkType: hard
 
@@ -2551,12 +2689,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@requestnetwork/transaction-manager@npm:0.36.0":
+  version: 0.36.0
+  resolution: "@requestnetwork/transaction-manager@npm:0.36.0"
+  dependencies:
+    "@requestnetwork/multi-format": 0.19.0
+    "@requestnetwork/types": 0.45.0
+    "@requestnetwork/utils": 0.45.0
+    tslib: 2.5.0
+  checksum: 2f3a0d000da4e9a280e13f7d3f4a2d8e87d7682d4866b2ee68ef38f9f89b93e0414fb31a275bfaa49f75d7897858f6cdf12a42bfa581dfb60d55490dbe489a81
+  languageName: node
+  linkType: hard
+
 "@requestnetwork/types@npm:0.43.1-next.2043+d9feda6f":
   version: 0.43.1-next.2043
   resolution: "@requestnetwork/types@npm:0.43.1-next.2043"
   dependencies:
     ethers: 5.5.1
   checksum: 334ae5c297aa0f937d4cfd3995aca717ffe6d67a0e825d47b46dc29b428256fd18cc66b591fd10d5be08a567b3daff71afd01015e76a0dc845ebaf6365b0fd9e
+  languageName: node
+  linkType: hard
+
+"@requestnetwork/types@npm:0.45.0":
+  version: 0.45.0
+  resolution: "@requestnetwork/types@npm:0.45.0"
+  dependencies:
+    ethers: 5.5.1
+  checksum: e904c877728edaf43e98309d92adafcf5f37762627ee3a92d36985128fc11e2e274ec9389d12edaae15b259032198a7641a635246975bca8175cc2b3d3a05690
   languageName: node
   linkType: hard
 
@@ -2573,15 +2732,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@requestnetwork/web3-signature@npm:0.6.1-next.2043":
-  version: 0.6.1-next.2043
-  resolution: "@requestnetwork/web3-signature@npm:0.6.1-next.2043"
+"@requestnetwork/utils@npm:0.45.0":
+  version: 0.45.0
+  resolution: "@requestnetwork/utils@npm:0.45.0"
   dependencies:
-    "@requestnetwork/types": 0.43.1-next.2043+d9feda6f
-    "@requestnetwork/utils": 0.43.1-next.2043+d9feda6f
+    "@requestnetwork/types": 0.45.0
+    "@toruslabs/eccrypto": 4.0.0
+    ethers: 5.5.1
+    secp256k1: 4.0.2
+    tslib: 2.5.0
+  checksum: ececae78314a1da315f1547c605d53290ba2a224ff75873422de4c22530e349463591e9553559ac318f37e52f343ae6f0240a0943a9273bcc4eacefe4ff80203
+  languageName: node
+  linkType: hard
+
+"@requestnetwork/web3-signature@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@requestnetwork/web3-signature@npm:0.8.0"
+  dependencies:
+    "@requestnetwork/types": 0.45.0
+    "@requestnetwork/utils": 0.45.0
     ethers: 5.5.1
     tslib: 2.5.0
-  checksum: 436c41025233b5ff7f3fe94fffe37285d7f5f6614cca2b5576965e2e690f2895bb5337b8c105570a3bc362f1d17aa4b5ccd9a10ae4d893100a5d0bbeee2eb41d
+  checksum: 5e9eaa3818c8ad78fd4d2f774c02f84c551339347082976b556f045517e95c6b480627d5483f7197f11c30635f2983241107891bfdc367e045ce08ac6f4b6d8a
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-inject@npm:^5.0.5":
+  version: 5.0.5
+  resolution: "@rollup/plugin-inject@npm:5.0.5"
+  dependencies:
+    "@rollup/pluginutils": ^5.0.1
+    estree-walker: ^2.0.2
+    magic-string: ^0.30.3
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: 22cb772fd6f7178308b2ece95cdde5f8615f6257197832166294552a7e4c0d3976dc996cbfa6470af3151d8b86c00091aa93da5f4db6ec563f11b6db29fd1b63
   languageName: node
   linkType: hard
 
@@ -2592,6 +2780,22 @@ __metadata:
     estree-walker: ^2.0.1
     picomatch: ^2.2.2
   checksum: 6bc41f22b1a0f1efec3043899e4d3b6b1497b3dea4d94292d8f83b4cf07a1073ecbaedd562a22d11913ff7659f459677b01b09e9598a98936e746780ecc93a12
+  languageName: node
+  linkType: hard
+
+"@rollup/pluginutils@npm:^5.0.1":
+  version: 5.1.0
+  resolution: "@rollup/pluginutils@npm:5.1.0"
+  dependencies:
+    "@types/estree": ^1.0.0
+    estree-walker: ^2.0.2
+    picomatch: ^2.3.1
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: 3cc5a6d91452a6eabbfd1ae79b4dd1f1e809d2eecda6e175deb784e75b0911f47e9ecce73f8dd315d6a8b3f362582c91d3c0f66908b6ced69345b3cbe28f8ce8
   languageName: node
   linkType: hard
 
@@ -2717,10 +2921,10 @@ __metadata:
     "@heroicons/react": ~2.0.11
     "@rainbow-me/rainbowkit": 2.1.2
     "@requestnetwork/create-invoice-form": ^0.7.0
-    "@requestnetwork/invoice-dashboard": ^0.6.0
-    "@requestnetwork/payment-detection": 0.43.1-next.2043
-    "@requestnetwork/request-client.js": 0.47.1-next.2043
-    "@requestnetwork/web3-signature": 0.6.1-next.2043
+    "@requestnetwork/invoice-dashboard": ^0.7.0
+    "@requestnetwork/payment-detection": ^0.45.0
+    "@requestnetwork/request-client.js": ^0.49.0
+    "@requestnetwork/web3-signature": ^0.8.0
     "@tanstack/react-query": ~5.28.6
     "@trivago/prettier-plugin-sort-imports": ~4.1.1
     "@types/node": ^17.0.45
@@ -3101,6 +3305,13 @@ __metadata:
   version: 1.0.3
   resolution: "@types/dom-screen-wake-lock@npm:1.0.3"
   checksum: 66bece3508b4f4147db97a530c758f8f5d3132ef00c06cab1db4bf2b4af6a3a614ae0a0ba6b53ddc4177a6545adf9d312547087256efc8eff7314b13221380b8
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:^1.0.0":
+  version: 1.0.5
+  resolution: "@types/estree@npm:1.0.5"
+  checksum: dd8b5bed28e6213b7acd0fb665a84e693554d850b0df423ac8076cc3ad5823a6bc26b0251d080bdc545af83179ede51dd3f6fa78cad2c46ed1f29624ddf3e41a
   languageName: node
   linkType: hard
 
@@ -4547,6 +4758,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"assert@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "assert@npm:2.1.0"
+  dependencies:
+    call-bind: ^1.0.2
+    is-nan: ^1.3.2
+    object-is: ^1.1.5
+    object.assign: ^4.1.4
+    util: ^0.12.5
+  checksum: 1ed1cabba9abe55f4109b3f7292b4e4f3cf2953aad8dc148c0b3c3bd676675c31b1abb32ef563b7d5a19d1715bf90d1e5f09fad2a4ee655199468902da80f7c2
+  languageName: node
+  linkType: hard
+
 "ast-types-flow@npm:^0.0.8":
   version: 0.0.8
   resolution: "ast-types-flow@npm:0.0.8"
@@ -4901,7 +5125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserify-zlib@npm:~0.2.0":
+"browserify-zlib@npm:^0.2.0, browserify-zlib@npm:~0.2.0":
   version: 0.2.0
   resolution: "browserify-zlib@npm:0.2.0"
   dependencies:
@@ -5012,7 +5236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buffer@npm:^5.1.0":
+"buffer@npm:^5.1.0, buffer@npm:^5.7.1":
   version: 5.7.1
   resolution: "buffer@npm:5.7.1"
   dependencies:
@@ -5120,7 +5344,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"call-bind@npm:^1.0.2, call-bind@npm:^1.0.5, call-bind@npm:^1.0.6, call-bind@npm:^1.0.7":
+"call-bind@npm:^1.0.0, call-bind@npm:^1.0.2, call-bind@npm:^1.0.5, call-bind@npm:^1.0.6, call-bind@npm:^1.0.7":
   version: 1.0.7
   resolution: "call-bind@npm:1.0.7"
   dependencies:
@@ -5550,7 +5774,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"constants-browserify@npm:~1.0.0":
+"constants-browserify@npm:^1.0.0, constants-browserify@npm:~1.0.0":
   version: 1.0.0
   resolution: "constants-browserify@npm:1.0.0"
   checksum: f7ac8c6d0b6e4e0c77340a1d47a3574e25abd580bfd99ad707b26ff7618596cf1a5e5ce9caf44715e9e01d4a5d12cb3b4edaf1176f34c19adb2874815a56e64f
@@ -5663,7 +5887,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-require@npm:^1.1.0":
+"create-require@npm:^1.1.0, create-require@npm:^1.1.1":
   version: 1.1.1
   resolution: "create-require@npm:1.1.1"
   checksum: a9a1503d4390d8b59ad86f4607de7870b39cad43d929813599a23714831e81c520bddf61bcdd1f8e30f05fd3a2b71ae8538e946eb2786dc65c2bbc520f692eff
@@ -5711,7 +5935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"crypto-browserify@npm:^3.0.0":
+"crypto-browserify@npm:^3.0.0, crypto-browserify@npm:^3.11.0":
   version: 3.12.0
   resolution: "crypto-browserify@npm:3.12.0"
   dependencies:
@@ -6177,6 +6401,13 @@ __metadata:
   version: 1.2.0
   resolution: "domain-browser@npm:1.2.0"
   checksum: 8f1235c7f49326fb762f4675795246a6295e7dd566b4697abec24afdba2460daa7dfbd1a73d31efbf5606b3b7deadb06ce47cf06f0a476e706153d62a4ff2b90
+  languageName: node
+  linkType: hard
+
+"domain-browser@npm:^4.22.0":
+  version: 4.23.0
+  resolution: "domain-browser@npm:4.23.0"
+  checksum: 95b772f5fa88300240694380e06e03868573acdf86ca392a58c78602d6536dca2097ad2469a1500bd23a1329b09992de846e0b66c364cbf5711a7fee3ee5dac9
   languageName: node
   linkType: hard
 
@@ -7252,7 +7483,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"estree-walker@npm:2.0.2, estree-walker@npm:^2, estree-walker@npm:^2.0.1":
+"estree-walker@npm:2.0.2, estree-walker@npm:^2, estree-walker@npm:^2.0.1, estree-walker@npm:^2.0.2":
   version: 2.0.2
   resolution: "estree-walker@npm:2.0.2"
   checksum: 6151e6f9828abe2259e57f5fd3761335bb0d2ebd76dc1a01048ccee22fabcfef3c0859300f6d83ff0d1927849368775ec5a6d265dde2f6de5a1be1721cd94efc
@@ -8907,6 +9138,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-nan@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "is-nan@npm:1.3.2"
+  dependencies:
+    call-bind: ^1.0.0
+    define-properties: ^1.1.3
+  checksum: 5dfadcef6ad12d3029d43643d9800adbba21cf3ce2ec849f734b0e14ee8da4070d82b15fdb35138716d02587c6578225b9a22779cab34888a139cc43e4e3610a
+  languageName: node
+  linkType: hard
+
 "is-negative-zero@npm:^2.0.3":
   version: 2.0.3
   resolution: "is-negative-zero@npm:2.0.3"
@@ -9103,6 +9344,13 @@ __metadata:
   version: 3.1.1
   resolution: "isexe@npm:3.1.1"
   checksum: 7fe1931ee4e88eb5aa524cd3ceb8c882537bc3a81b02e438b240e47012eef49c86904d0f0e593ea7c3a9996d18d0f1f3be8d3eaa92333977b0c3a9d353d5563e
+  languageName: node
+  linkType: hard
+
+"isomorphic-timers-promises@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "isomorphic-timers-promises@npm:1.0.1"
+  checksum: 16ef59f0fbcceba1a037c74b5f7195d252ae058724ccd3e53b37ad034e8498f5532084e8ab18e7940ba3fa8fca2f21403d00eed15802ab1f7cab7c099cba62a8
   languageName: node
   linkType: hard
 
@@ -9692,6 +9940,15 @@ __metadata:
   version: 0.4.1
   resolution: "lru_map@npm:0.4.1"
   checksum: a3eb277ca7e673c7d6e78578193cc7c67a7410978c260f9b49418aa2053c7cb025d98326d3e74817119cb4ef5f114e2e05da58b7badfbde4a7b4d566c5f294e5
+  languageName: node
+  linkType: hard
+
+"magic-string@npm:^0.30.3":
+  version: 0.30.11
+  resolution: "magic-string@npm:0.30.11"
+  dependencies:
+    "@jridgewell/sourcemap-codec": ^1.5.0
+  checksum: e041649453c9a3f31d2e731fc10e38604d50e20d3585cd48bc7713a6e2e1a3ad3012105929ca15750d59d0a3f1904405e4b95a23b7e69dc256db3c277a73a3ca
   languageName: node
   linkType: hard
 
@@ -10478,6 +10735,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-stdlib-browser@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "node-stdlib-browser@npm:1.2.0"
+  dependencies:
+    assert: ^2.0.0
+    browser-resolve: ^2.0.0
+    browserify-zlib: ^0.2.0
+    buffer: ^5.7.1
+    console-browserify: ^1.1.0
+    constants-browserify: ^1.0.0
+    create-require: ^1.1.1
+    crypto-browserify: ^3.11.0
+    domain-browser: ^4.22.0
+    events: ^3.0.0
+    https-browserify: ^1.0.0
+    isomorphic-timers-promises: ^1.0.1
+    os-browserify: ^0.3.0
+    path-browserify: ^1.0.1
+    pkg-dir: ^5.0.0
+    process: ^0.11.10
+    punycode: ^1.4.1
+    querystring-es3: ^0.2.1
+    readable-stream: ^3.6.0
+    stream-browserify: ^3.0.0
+    stream-http: ^3.2.0
+    string_decoder: ^1.0.0
+    timers-browserify: ^2.0.4
+    tty-browserify: 0.0.1
+    url: ^0.11.0
+    util: ^0.12.4
+    vm-browserify: ^1.0.1
+  checksum: fe491f0839319fd9bb95964c6f7da81fc7fde4c3ac9062aa367f19bc5a6060d0d9e423d3de4196cb51f8259d6aaf6cf380048c48a86eb3721c6223dd0dcc5bfd
+  languageName: node
+  linkType: hard
+
 "nopt@npm:^5.0.0":
   version: 5.0.0
   resolution: "nopt@npm:5.0.0"
@@ -10743,7 +11035,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"os-browserify@npm:~0.3.0":
+"os-browserify@npm:^0.3.0, os-browserify@npm:~0.3.0":
   version: 0.3.0
   resolution: "os-browserify@npm:0.3.0"
   checksum: 16e37ba3c0e6a4c63443c7b55799ce4066d59104143cb637ecb9fce586d5da319cdca786ba1c867abbe3890d2cbf37953f2d51eea85e20dd6c4570d6c54bfebf
@@ -11127,6 +11419,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pkg-dir@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "pkg-dir@npm:5.0.0"
+  dependencies:
+    find-up: ^5.0.0
+  checksum: b167bb8dac7bbf22b1d5e30ec223e6b064b84b63010c9d49384619a36734caf95ed23ad23d4f9bd975e8e8082b60a83395f43a89bb192df53a7c25a38ecb57d9
+  languageName: node
+  linkType: hard
+
 "pkg-types@npm:^1.1.1":
   version: 1.2.0
   resolution: "pkg-types@npm:1.2.0"
@@ -11491,7 +11792,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"querystring-es3@npm:~0.2.0":
+"querystring-es3@npm:^0.2.1, querystring-es3@npm:~0.2.0":
   version: 0.2.1
   resolution: "querystring-es3@npm:0.2.1"
   checksum: 691e8d6b8b157e7cd49ae8e83fcf86de39ab3ba948c25abaa94fba84c0986c641aa2f597770848c64abce290ed17a39c9df6df737dfa7e87c3b63acc7d225d61
@@ -12189,6 +12490,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"setimmediate@npm:^1.0.4":
+  version: 1.0.5
+  resolution: "setimmediate@npm:1.0.5"
+  checksum: c9a6f2c5b51a2dabdc0247db9c46460152ffc62ee139f3157440bd48e7c59425093f42719ac1d7931f054f153e2d26cf37dfeb8da17a794a58198a2705e527fd
+  languageName: node
+  linkType: hard
+
 "setprototypeof@npm:1.1.1":
   version: 1.1.1
   resolution: "setprototypeof@npm:1.1.1"
@@ -12496,7 +12804,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stream-http@npm:^3.0.0":
+"stream-http@npm:^3.0.0, stream-http@npm:^3.2.0":
   version: 3.2.0
   resolution: "stream-http@npm:3.2.0"
   dependencies:
@@ -12662,7 +12970,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"string_decoder@npm:^1.1.1, string_decoder@npm:^1.3.0":
+"string_decoder@npm:^1.0.0, string_decoder@npm:^1.1.1, string_decoder@npm:^1.3.0":
   version: 1.3.0
   resolution: "string_decoder@npm:1.3.0"
   dependencies:
@@ -13039,6 +13347,15 @@ __metadata:
   dependencies:
     process: ~0.11.0
   checksum: b7437e228684d8e6e193580d363ffdcd752396c0d1013503f50e412aa86e920248a8627450ad40557443e07ef6b9b602ffc940b3ba06db23774a7ab507e1911d
+  languageName: node
+  linkType: hard
+
+"timers-browserify@npm:^2.0.4":
+  version: 2.0.12
+  resolution: "timers-browserify@npm:2.0.12"
+  dependencies:
+    setimmediate: ^1.0.4
+  checksum: ec37ae299066bef6c464dcac29c7adafba1999e7227a9bdc4e105a459bee0f0b27234a46bfd7ab4041da79619e06a58433472867a913d01c26f8a203f87cee70
   languageName: node
   linkType: hard
 
@@ -13689,7 +14006,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"url@npm:~0.11.0":
+"url@npm:^0.11.0, url@npm:~0.11.0":
   version: 0.11.4
   resolution: "url@npm:0.11.4"
   dependencies:
@@ -13785,7 +14102,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"util@npm:^0.12.4, util@npm:~0.12.0":
+"util@npm:^0.12.4, util@npm:^0.12.5, util@npm:~0.12.0":
   version: 0.12.5
   resolution: "util@npm:0.12.5"
   dependencies:
@@ -13979,7 +14296,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vm-browserify@npm:^1.0.0":
+"vite-plugin-node-polyfills@npm:^0.22.0":
+  version: 0.22.0
+  resolution: "vite-plugin-node-polyfills@npm:0.22.0"
+  dependencies:
+    "@rollup/plugin-inject": ^5.0.5
+    node-stdlib-browser: ^1.2.0
+  peerDependencies:
+    vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
+  checksum: c08d3df0d5cc3102280483d3f7b216f92a18e0708fcb9f67f78f01ab865474254756bacee17caa90b3f46afe5834cb9d8de0dd0e58c1bbbdae1b949edc1e6b57
+  languageName: node
+  linkType: hard
+
+"vm-browserify@npm:^1.0.0, vm-browserify@npm:^1.0.1":
   version: 1.1.2
   resolution: "vm-browserify@npm:1.1.2"
   checksum: 10a1c50aab54ff8b4c9042c15fc64aefccce8d2fb90c0640403242db0ee7fb269f9b102bdb69cfb435d7ef3180d61fd4fb004a043a12709abaf9056cfd7e039d
