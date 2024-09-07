@@ -43,7 +43,7 @@ If you find a sloth, there is the possibility to post a roast for this slow paye
 ## Bounties 😎
 
 ### Request Network - Best app that creates requests
-We created a reputation system for to create, query and update reputation on chain. 
+We created a reputation system for to create, query and update reputation for Request Network.
 
 ### BuidlGuidl - Best Scaffold-ETH2 Submission
 We initialized the project using Scaffold-ETH 2 with the [SE2 Request Network extension](https://github.com/arjanjohan/scaffold-request-extension). 
