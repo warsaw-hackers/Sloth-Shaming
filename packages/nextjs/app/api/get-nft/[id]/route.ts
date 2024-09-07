@@ -792,14 +792,15 @@ export async function GET(req: NextRequest, context: any) {
   }
   let rating = await returnRating(data);
   let animalName = "";
-  if (rating < 1) {
-    animalName = "placeholder";
-  } else if (rating < 70) {
+
+  if (rating < 70) {
     animalName = "sloth";
   } else if (rating >= 70 && rating < 90) {
     animalName = "wolf";
   } else if (rating >= 90) {
     animalName = "cheetah";
+  } else {
+    animalName = "placeholder";
   }
   // switch (!!rating) {
   //   case rating < 1:
