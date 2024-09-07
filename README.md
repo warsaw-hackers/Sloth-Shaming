@@ -35,22 +35,22 @@ We use Worldcoin World ID for preventing sybill and spam attacks, to ensure a mo
 In order to automatically generate roasts for late payments, we use Golem to run an AI model. These roasts then gets posted to x dot com the everything app.
 
 ### Optimism
-We deployed our contracts on Optimism Sepolia, because Worldcoin World ID is required for our dApp. Also it's possible to pay invoices on Optimism within our dApp.
+We deployed our contracts on Optimism Sepolia, because Worldcoin World ID is required for our dApp. Also it's possible to pay invoices on Optimism within our dApp. [Deployment]()
 
 ### Celo
-Celo is available as a payment Chain on our Request Network dApp. Also, we use Celo Alfojores testnet for for creating a SBT in our registry. 
+Celo is available as a payment Chain on our Request Network dApp. Also, we use Celo Alfojores testnet for for creating a SBT in our registry. [Deployment](https://explorer.celo.org/alfajores/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF)
 
 ### DragonSwap - Pooled bounty
-We use Sei network for for creating a SBT in our registry. 
+We use Sei network for for creating a SBT in our registry. [Deployment](https://seitrace.com/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?chain=pacific-1)
 
 ### Zircuit - Best Project on Zircuit
-We use Zircuit testnet for for creating a SBT in our registry. 
+We use Zircuit testnet for for creating a SBT in our registry. [Deployment](https://explorer.testnet.zircuit.com/address/0x81afFbf9392a1402B44B8b6C45C89F602657b3eF)
 
 ### Mantle Network - Best UX/UI project
-Mantle is available as a payment Chain on our Request Network dApp. Also, we use mantle testnet for for creating a SBT in our registry. 
+Mantle is available as a payment Chain on our Request Network dApp. Also, we use Mantle testnet for for creating a SBT in our registry. [Deployment](https://explorer.sepolia.mantle.xyz/address/0xF519289Ed67326514c6Eb47851f9e605DC8ad640?tab=txs)
 
 ### ENS - Best use of ENS
-Our dapp fully supports ENS names, and users are able to search and interact with others using their ENS name as well as their wallet address. 
+Our dapp fully supports ENS names, and users are able to search and interact with others using their ENS name as well as their wallet address.
 
 ## Next steps
 
