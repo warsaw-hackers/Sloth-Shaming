@@ -5,7 +5,7 @@ export const returnRating = async (address: string): Promise<number> => {
   const requestNetwork = initializeRequestNetworkDummy()?.requestNetwork;
   console.log("Request Network initialized:", requestNetwork);
   if (!requestNetwork) {
-    return 50; // Default score if Request Network is not initialized
+    return 80; // Default score if Request Network is not initialized
   }
   try {
     // Fetch all the requests for the provided address
@@ -20,7 +20,7 @@ export const returnRating = async (address: string): Promise<number> => {
       .filter(invoice => invoice.payer?.value === address); // Only consider invoices that need to be paid by the user
 
     if (payerInvoices.length === 0) {
-      return 50; // Default score if no invoices found
+      return 80; // Default score if no invoices found
     }
 
     // Array to hold the rating for each invoice
