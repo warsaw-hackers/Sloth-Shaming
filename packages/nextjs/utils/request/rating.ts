@@ -1,6 +1,14 @@
-import { RequestNetwork, Types } from "@requestnetwork/request-client.js";
+import React, { useEffect, useState } from "react";
 
-export const returnRating = async (address: string, requestNetwork: RequestNetwork): Promise<number> => {
+import { RequestNetwork, Types } from "@requestnetwork/request-client.js";
+import { initializeRequestNetworkDummy } from "./initializeDummyRN";
+
+export const returnRating = async (address: string): Promise<number> => {
+  const requestNetwork = initializeRequestNetworkDummy();
+  console.log("Request Network initialized:", requestNetwork);
+  if (!requestNetwork) {
+    return 50; // Default score if Request Network is not initialized
+  }
   try {
     // Fetch all the requests for the provided address
     const requests = await requestNetwork.fromIdentity({
