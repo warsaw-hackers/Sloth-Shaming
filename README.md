@@ -5,8 +5,9 @@
 <h4 align="center">
   <a href="https://slothshaming.com">Website</a> |
   <a href="https://github.com/arjanjohan/scaffold-request-extension">Scaffold-Request-Extension </a>
-
-  <img src="./assets/Logo.png" alt="Logo" width="300" height="auto">
+  <p align="center">
+    <img src="./assets/Logo.png" alt="Logo" width="300" height="auto">
+  </p>
 </h4>
 
 🦥 Sloth Shaming is a platform that allows you to create a profile, receive ratings based on your invoices on Request Network, and wether or not you are paying them on time. Late payers will be named and shamed, and responsible payers will be rewarded with good reputation, and as an effect, have poovable crdibility.
