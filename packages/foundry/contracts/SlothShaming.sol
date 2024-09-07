@@ -189,4 +189,14 @@ contract SlothShaming is ERC721, Ownable {
         baseUri = _newBaseUri;
     }
 
+    /**
+     * @notice
+     *  Updates the use worldId status
+     *
+     * @param _newStatus the new status
+     *
+     */
+    function toggleWorldIdStatus(bool _newStatus) external onlyOwner {
+        useWordlId = _newStatus;
+    }
 }
