@@ -1,41 +1,62 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+
 import {
-  IDKitWidget, // , ISuccessResult, useIDKit
+  IDKitWidget
 } from "@worldcoin/idkit";
 import { useTheme } from "next-themes";
+import { useScaffoldWriteContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { decodeAbiParameters, parseAbiParameters } from "viem";
 import { useAccount } from "wagmi";
-import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 const Mint: React.FC = () => {
   const { address } = useAccount();
   const [proof, setProof] = useState<string | any>("");
   const { resolvedTheme } = useTheme();
-  const [hasNft, setHasNft] = useState(false);
   const isDarkMode = resolvedTheme === "dark";
   const { writeContractAsync } = useScaffoldWriteContract("SlothShaming");
 
-  const handleMint = async () => {
-    if (!proof) {
-      return;
-    }
+  const { data: nftId, isLoading } = useScaffoldReadContract({
+    contractName: "SlothShaming",
+    functionName: "idOf",
+    args: [address]
+  });
 
+
+  const { data: nftUri, isLoading: isLoadingUri } = useScaffoldReadContract({
+    contractName: "SlothShaming",
+    functionName: "tokenURI",
+    args: [nftId]
+  });
+
+  // Descriptive variables
+  const hasMintedNFT = nftId !== 0n && !isLoading;
+  const isEligibleToMint = nftId === 0n && !isLoading;
+
+  const handleMint = async () => {
+    // Dummy proof
     let transformedProof = {
-      root: BigInt(proof!.merkle_root),
-      signal: address,
-      nullifierHash: BigInt(proof!.nullifier_hash),
-      proof: decodeAbiParameters(parseAbiParameters("uint256[8]"), proof!.proof as `0x${string}`)[0],
+      root: BigInt(0),
+      signal: "0x0000000000000000000000000000000000000000",
+      nullifierHash: BigInt(0),
+      proof: Array(8).fill(BigInt(0)),
     };
 
+    // If the proof is available, use it.
+    if (proof) {
+      transformedProof = {
+        root: BigInt(proof!.merkle_root),
+        signal: address,
+        nullifierHash: BigInt(proof!.nullifier_hash),
+        proof: decodeAbiParameters(parseAbiParameters("uint256[8]"), proof!.proof as `0x${string}`)[0],
+      };
+    }
     await writeContractAsync({
       functionName: "registerSloth",
       args: [proof],
     });
   };
-
   return (
     <div className="container mx-auto p-8">
       <h1 className="text-center mb-4 mt-5">
@@ -43,21 +64,21 @@ const Mint: React.FC = () => {
       </h1>
 
       <div className="flex justify-center items-center">
-        {hasNft && (
+        {hasMintedNFT && (
           <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-4 m-4 text-center">
             <p>You have already minted your reputation NFT. </p>
           </div>
         )}
-        {!hasNft && !proof && (
+
+        {isEligibleToMint && !proof && (
           <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-4 m-4 text-center">
             <p>We use Worldcoin World ID to verify your identity. Please sign in to continue. </p>
             <IDKitWidget
               app_id={process.env.NEXT_PUBLIC_APP_ID as `app_${string}`}
               action={process.env.NEXT_PUBLIC_ACTION_CREATE as string}
-              signal={address} // proof will only verify if the signal is unchanged, this prevents tampering
-              onSuccess={setProof} // use onSuccess to call your smart contract
-              // no use for handleVerify, so it is removed
-              // use default verification_level (orb-only), as device credentials are not supported on-chain
+
+              signal={address}
+              onSuccess={setProof}
             >
               {({ open }) => (
                 <button className="btn btn-primary" onClick={open}>
@@ -68,51 +89,60 @@ const Mint: React.FC = () => {
             <p>Powered by: </p>
             <div>
               {isDarkMode ? (
-                <Image src="/Worldcoin-logo-lockup-light.svg" alt="Worldcoin Logo" width={200} height={200} />
+
+                <img src="/Worldcoin-logo-lockup-light.svg" alt="Worldcoin Logo" className="w-200" />
               ) : (
-                <Image src="/Worldcoin-logo-lockup-dark.svg" alt="Worldcoin Logo" width={200} height={200} />
+                <img src="/Worldcoin-logo-lockup-dark.svg" alt="Worldcoin Logo" className="w-200" />
               )}
             </div>
           </div>
         )}
-        {!hasNft && proof && (
+
+        {isEligibleToMint && proof && (
           <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-4 m-4 text-center">
             <p>You have verified with World ID. </p>
-
             <p>Powered by: </p>
             <div>
               {isDarkMode ? (
-                <Image src="/Worldcoin-logo-lockup-light.svg" alt="Worldcoin Logo" width={200} />
+
+                <img src="/Worldcoin-logo-lockup-light.svg" alt="Worldcoin Logo" className="w-200" />
               ) : (
-                <Image src="/Worldcoin-logo-lockup-dark.svg" alt="Worldcoin Logo" width={200} />
+                <img src="/Worldcoin-logo-lockup-dark.svg" alt="Worldcoin Logo" className="w-200" />
               )}
             </div>
           </div>
         )}
       </div>
+
       <div className="flex justify-center items-center">
-        {!hasNft && (
+        {isEligibleToMint && (
           <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-8 m-8">
             <div className="flex flex-col text-center mb-4">
               <span className="text-2xl font-semibold">Mint your reputation NFT</span>
             </div>
             <div className="flex flex-col space-y-4">
               <div className="flex flex-col items-center mt-4">
-                <button className="btn btn-primary" disabled={!proof || hasNft} onClick={handleMint}>
+                <button className="btn btn-primary" 
+                  disabled={!proof} 
+                  onClick={handleMint}>
                   Mint
                 </button>
               </div>
             </div>
           </div>
         )}
-        {hasNft && (
+
+
+        {hasMintedNFT && (
           <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-8 m-8">
             <div className="flex flex-col text-center mb-4">
               <span className="text-2xl font-semibold">Your reputation NFT</span>
             </div>
             <div className="flex justify-center items-center">
-              <Image src="/placeholder.jpeg" alt="Sloth" width={200} height={200} />
+            <img src="/placeholder.jpeg" alt="Sloth" className="w-200" />
+
             </div>
+            <p>Token URI: {nftUri}</p>
           </div>
         )}
       </div>
