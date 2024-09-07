@@ -10,6 +10,7 @@ import { AddressInput } from "~~/components/scaffold-eth";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { usePinataRetrieveData } from "~~/hooks/usePinataRetrieveData";
 import { truncateAddress } from "~~/utils";
+import { handleTweet } from "~~/utils/twitter";
 
 async function fetchNFTData(id: number) {
   const response = await fetch(`/api/get-nft/${id}`);
@@ -42,6 +43,7 @@ const Home: NextPage = () => {
     functionName: "idOf",
     args: [value],
   });
+
   // const { data: nftUri, refetch: refetchNFTuri } = useScaffoldReadContract({
   //   contractName: "SlothShaming",
   //   functionName: "tokenURI",
@@ -118,8 +120,11 @@ const Home: NextPage = () => {
           <AddressInput onChange={setValue} value={value} placeholder="Input your address" />
           <button
             className="btn bg-[#FE8731] hover:bg-[#E16811] border-none text-white"
-            onClick={() => setIsSearchClick(true)}
-            disabled={isFetchingNFT && isFetchingNFTData}
+            // onClick={() => setIsSearchClick(true)}
+            // disabled={isFetchingNFT && isFetchingNFTData}
+            onClick={() => {
+              handleTweet();
+            }}
           >
             Shame
           </button>
