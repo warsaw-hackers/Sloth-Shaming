@@ -1,37 +1,54 @@
-import { Types } from "@requestnetwork/request-client.js";
+import { RequestNetwork, Types } from "@requestnetwork/request-client.js";
 
-export const returnRating = (invoices: Types.IRequestDataWithEvents[]): number => {
-  const ratingsArray: number[] = [];
+export const returnRating = async (address: string, requestNetwork: RequestNetwork): Promise<number> => {
+  try {
+    // Fetch all the requests for the provided address
+    const requests = await requestNetwork.fromIdentity({
+      type: Types.Identity.TYPE.ETHEREUM_ADDRESS,
+      value: address,
+    });
 
-  for (const invoice of invoices) {
-    const createDate = new Date(invoice.contentData.creationDate);
-    const dueDate = new Date(invoice.contentData.paymentTerms.dueDate);
-    const currentDate = new Date();
+    // Filter the requests where the address is the payer
+    const payerInvoices = requests
+      .map(request => request.getData())
+      .filter(invoice => invoice.payer?.value === address); // Only consider invoices that need to be paid by the user
 
-    let paid = Number(invoice.balance?.balance) >= Number(invoice.expectedAmount);
-
-    if (!paid && currentDate > dueDate) {
-      ratingsArray.push(0); // UNPAID AND LATE
-    } else if (paid) {
-      let paymentDate = currentDate; // default to current date if no payment timestamp available
-      const paymentTimeStamp = invoice.balance?.events[0]?.timestamp;
-
-      if (paymentTimeStamp) {
-        paymentDate = new Date(paymentTimeStamp * 1000); // convert seconds to milliseconds
-      }
-
-      if (paymentDate <= dueDate) {
-        ratingsArray.push(100); // PAID ON TIME
-      } else {
-        ratingsArray.push(0); // PAID LATE
-      }
+    if (payerInvoices.length === 0) {
+      return 50; // Default score if no invoices found
     }
-  }
 
-  if (ratingsArray.length === 0) {
-    return 50; // AVERAGE SCORE FOR NO INVOICES
-  }
+    // Array to hold the rating for each invoice
+    const ratingsArray: number[] = [];
 
-  const average = ratingsArray.reduce((a, b) => a + b, 0) / ratingsArray.length;
-  return Math.round(average);
+    payerInvoices.forEach(invoice => {
+      const dueDate = new Date(invoice.contentData.paymentTerms.dueDate);
+      const currentDate = new Date();
+
+      const isPaid = Number(invoice.balance?.balance) >= Number(invoice.expectedAmount);
+
+      if (!isPaid && currentDate > dueDate) {
+        ratingsArray.push(0); // UNPAID AND LATE
+      } else if (isPaid) {
+        const paymentTimeStamp = invoice.balance?.events[0]?.timestamp;
+        let paymentDate = currentDate;
+
+        if (paymentTimeStamp) {
+          paymentDate = new Date(paymentTimeStamp * 1000); // Convert from seconds to milliseconds
+        }
+
+        if (paymentDate <= dueDate) {
+          ratingsArray.push(100); // PAID ON TIME
+        } else {
+          ratingsArray.push(0); // PAID LATE
+        }
+      }
+    });
+
+    // Calculate the average rating
+    const averageRating = ratingsArray.reduce((sum, rating) => sum + rating, 0) / ratingsArray.length;
+    return Math.round(averageRating); // Return rounded integer value
+  } catch (error) {
+    console.error("Failed to calculate rating:", error);
+    return 50; // Return default score in case of an error
+  }
 };
