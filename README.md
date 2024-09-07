@@ -12,7 +12,6 @@
 
 🦥 Sloth Shaming is a platform that allows you to create a profile, receive ratings based on your invoices on Request Network, and wether or not you are paying them on time. Late payers will be named and shamed, and responsible payers will be rewarded with good reputation, and as an effect, have provable credibility.
 
-- ✅ **Register account**: Register an account using metamask.
 - 🩻 **SoulBound**: Upon registration users will receive a soulbound token that represents their profile.
 - ⛓️ **Dynamic NFT**: The associated NFT will be dynamically changed throughout your activity history on request network.
 - 🔎 **Search the Registry**: Search for anyone, using ther ethereum address or ENS name to quickly check their reputation.
@@ -52,7 +51,7 @@ We initialized the project using Scaffold-ETH 2 with the [SE2 Request Network ex
 We use Worldcoin World ID for preventing sybil and spam attacks, to ensure a more fair and robust reputation system.
 
 ### Golem
-Our initial idea was to automatically generate roasts for late payments, we use Golem to run an AI model. These roasts would then get posted to x dot com the everything app. However we ran into some issues with golem not being compatible with next.js, which we were using for this project. However, we tried [really hard to make it work...](https://github.com/warsaw-hackers/Sloth-Shaming/commit/e3f74e0ccc45d9b1b83b66476b7631af8f66498b)
+Our initial idea was to automatically generate roasts for late payments, we use Golem to run an AI model. These roasts would then get posted to x dot com the everything app. However we ran into some issues with Golem not being compatible with next.js, which we were using for this project. However, we tried [really hard to make it work...](https://github.com/warsaw-hackers/Sloth-Shaming/commit/e3f74e0ccc45d9b1b83b66476b7631af8f66498b)
 
 ### Optimism
 We deployed our contracts on Optimism Sepolia, because Worldcoin World ID is required for our dApp. Also it's possible to pay invoices on Optimism within our dApp. [Deployment](https://sepolia-optimism.etherscan.io/address/0xBf8C8Ef202C8D14f8657f6E476c0F115906c773D)
