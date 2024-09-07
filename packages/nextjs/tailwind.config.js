@@ -86,6 +86,7 @@ module.exports = {
       },
       fontFamily: {
         montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
+        pixel: ["Pixelify Sans", ...defaultTheme.fontFamily.sans],
       },
     },
   },

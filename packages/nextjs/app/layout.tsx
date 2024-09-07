@@ -12,7 +12,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = getMetadata({
-  title: "Sloth Shame",
+  title: "Sloth Shaming",
   description: "Built with 🏗 Scaffold-ETH 2",
 });
 
@@ -26,6 +26,7 @@ const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
           href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"
         />
+        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet" />
       </head>
       <body className="font-montserrat">
         <ThemeProvider enableSystem>

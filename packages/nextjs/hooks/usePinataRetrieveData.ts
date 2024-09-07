@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 
 const GATEWAY = "https://lavender-manual-goat-205.mypinata.cloud";
 
-async function fetchFileFromIPFS(cid: string) {
-  const url = `${GATEWAY}/ipfs/${cid}`;
+async function fetchFileFromIPFS(imageUrl: string) {
+  const url = imageUrl;
   const response = await fetch(url, { next: { revalidate: 3600 } }); // Cache for 1 hour
   console.log("🚀 ~ fetchFileFromIPFS ~ url:", url);
   if (!response.ok) {

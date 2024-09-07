@@ -2,13 +2,22 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
 import type { NextPage } from "next";
 import { useDebounce } from "react-use";
-import { isAddress } from "viem";
 import { useAccount } from "wagmi";
 import { AddressInput } from "~~/components/scaffold-eth";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { usePinataRetrieveData } from "~~/hooks/usePinataRetrieveData";
+
+async function fetchNFTData(id: number) {
+  const response = await fetch(`/api/get-nft/${id}`);
+  console.log("🚀 ~ fetchNFTData ~ response:", response);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+}
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
@@ -16,8 +25,6 @@ const Home: NextPage = () => {
   const [debouncedValue, setDebouncedValue] = useState("");
   const [isSignedUp, setIsSignedUp] = useState(false);
   const [isSearchClick, setIsSearchClick] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isValidAddress, setIsValidAddress] = useState(false);
   const [, cancel] = useDebounce(
     () => {
       setDebouncedValue(value);
@@ -25,20 +32,26 @@ const Home: NextPage = () => {
     500,
     [value],
   );
-  const [cid, setCid] = useState("QmdymxLzqyNtNBWRwHtxvLrqx2QvSSpN9CKRkETW4WtBrZ");
   const { data: balance, refetch: refetchUserNft } = useScaffoldReadContract({
     contractName: "SlothShaming",
     functionName: "idOf",
     args: [value],
   });
-  const { data: nftUri, refetch: refetchNFTuri } = useScaffoldReadContract({
-    contractName: "SlothShaming",
-    functionName: "tokenURI",
-    args: [balance],
-  });
-  const { data, isFetching } = usePinataRetrieveData(nftUri!, value!, isSearchClick);
-  console.log("data", data);
+  // const { data: nftUri, refetch: refetchNFTuri } = useScaffoldReadContract({
+  //   contractName: "SlothShaming",
+  //   functionName: "tokenURI",
+  //   args: [balance],
+  // });
 
+  const { data: nftData, refetch: refetchNFTuri } = useQuery({
+    queryKey: ["customData", Number(balance ?? 0)],
+    queryFn: () => fetchNFTData(Number(balance ?? 0)),
+    enabled: typeof balance == "bigint" && isSearchClick ? true : false,
+  });
+  const { data, isFetching } = usePinataRetrieveData(nftData?.animalData?.image!, value!, isSearchClick);
+
+  console.log("🚀 ~ nftUri:", balance);
+  console.log("🚀 ~ nftData:", nftData);
   useEffect(() => {
     refetchUserNft();
   }, [isSearchClick]);
@@ -49,16 +62,15 @@ const Home: NextPage = () => {
     }
   }, [balance]);
 
-  useEffect(() => {
-    if (value) {
-      const result = isAddress(value);
-      setIsValidAddress(result);
-    }
-  }, [value]);
+  // useEffect(() => {
+  //   if (value) {
+  //     const result = isAddress(value);
+  //   }
+  // }, [value]);
 
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-10 text-white">
+      <div className="flex items-center flex-col flex-grow pt-10 gap-6 text-white">
         {/* <label className="input input-bordered flex items-center gap-2">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -82,10 +94,16 @@ const Home: NextPage = () => {
               className="input focus:border-0 w-full max-w-xs placeholder:text-white "
             />
           </label> */}
-        <Image src={"/assets/homepage-sloth.svg"} height={200} width={200} alt="home-page" />
+        <div className="flex flex-col gap-4 justify-center items-center">
+          <Image src={"/assets/placeholder.svg"} height={200} width={200} alt="home-page" />
+          <h1 className="text-[60px] tracking-tighter font-pixel">Enter Address</h1>
+        </div>
         <div className="flex gap-4 justify-center items-center">
           <AddressInput onChange={setValue} value={value} placeholder="Input your address" />
-          <button className="btn btn-primary" onClick={() => setIsSearchClick(true)}>
+          <button
+            className="btn bg-[#FE8731] hover:bg-[#E16811] border-none text-white"
+            onClick={() => setIsSearchClick(true)}
+          >
             Search
           </button>
         </div>
@@ -105,6 +123,7 @@ const Home: NextPage = () => {
           <div className="px-5">
             <div>
               {" "}
+              {value}
               {data && (
                 <div className="my-4">
                   <img src={`data:image/svg+xml;base64,${btoa(data)}`} alt="SVG from IPFS" className="w-8 h-8" />
