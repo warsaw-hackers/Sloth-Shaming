@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   11155420: {
     SlothShaming: {
-      address: "0xc8950a0f10a5c6b6c62321e738002894f540a29a",
+      address: "0xfe214e47c66e3d29ad24702e2a6e4d46290a6654",
       abi: [
         {
           type: "constructor",

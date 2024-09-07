@@ -45,7 +45,7 @@ contract SlothShaming is ERC721, Ownable {
     uint256 internal immutable groupId = 1;
 
     // Current id, forever incrementing
-    uint256 private currentId;
+    uint256 private currentId = 1;
 
     /// @dev Keep track of if we are using worldId
     bool public useWordlId;
