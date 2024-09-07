@@ -43,7 +43,7 @@ polygonMumbai = { key = "${ETHERSCAN_API_KEY}" }
 sepolia = { key = "${ETHERSCAN_API_KEY}" }
 celoTestnet = { key = "${CELO_API_KEY}", chain = 44787, url="https://alfajores.celoscan.io" }
 scrollSepolia = { key = "${SCROLL_API_KEY}", chain = 534351, url = "https://api-sepolia.scrollscan.com/api" }
-optimismSepolia = { key = "${OPTIMISM_API_KEY}", chain = 11155420, url = "https://api-sepolia.scrollscan.com/api" } 
+optimismSepolia = { key = "${OPTIMISM_API_KEY}", chain = 11155420, url = "https://api-sepolia-optimistic.etherscan.io/api" } 
 
 # [fmt]
 # multiline_func_header = "params_first"

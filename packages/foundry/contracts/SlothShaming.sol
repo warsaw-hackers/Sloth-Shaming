@@ -80,7 +80,7 @@ contract SlothShaming is ERC721, Ownable {
         bool _useWorldId,
         address _worldId,
         string memory _appId,
-        string memory _registryId,
+        string memory _registryId
     ) {
         // Set the status of worldId usage
         useWordlId = _useWorldId;

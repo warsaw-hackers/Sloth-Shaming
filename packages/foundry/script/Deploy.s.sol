@@ -12,17 +12,18 @@ contract DeployScript is ScaffoldETHDeploy {
     string actionId = vm.envString("ACTION_ID");
     address worldId = vm.envAddress("WORLD_ID_ADDRESS");
 
-
     bool usesWorldId = true;
 
     function run() external {
         vm.startBroadcast(pkey);
-        slothShaming = new slothShaming(
+        slothShaming = new SlothShaming(
             usesWorldId,
             worldId,
             appId,
             actionId
         );
         vm.stopBroadcast();
+
+        exportDeployments();
     }
 }
