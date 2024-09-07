@@ -21,7 +21,7 @@ const ANIMALS = [
       },
       {
         trait_type: "Animal",
-        value: "Sloth",
+        value: "Slow Sloth",
       },
     ],
     image: "https://lavender-manual-goat-205.mypinata.cloud/ipfs/QmbfwSxAvyJJW5XbnY5Zp8Z3dViumiWYQ1AhAMVRcm8B3B",
@@ -41,7 +41,7 @@ const ANIMALS = [
       },
       {
         trait_type: "Animal",
-        value: "Cheetah",
+        value: "Speedy Cheetah",
       },
     ],
     image: "https://lavender-manual-goat-205.mypinata.cloud/ipfs/QmZV1FASZ4xGVGGVzeZscNF2o2UcEHKaXeZEeLg9hU3wEV",
@@ -61,7 +61,7 @@ const ANIMALS = [
       },
       {
         trait_type: "Animal",
-        value: "Wolf",
+        value: "Neutral Wolf",
       },
     ],
     image: "https://lavender-manual-goat-205.mypinata.cloud/ipfs/QmcCYzSuijgxKUb9ft2gJUt9Cpt6NJCA4y1CrZwbcHNP7E",
