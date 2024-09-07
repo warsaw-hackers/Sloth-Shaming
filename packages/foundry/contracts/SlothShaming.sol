@@ -211,6 +211,9 @@ contract SlothShaming is ERC721, Ownable {
         // Super mint
         super._mint(_to, currentId);
 
+        // Set idOf mapping
+        idOf[_to] = currentId;
+
         // Increment currentId
         currentId++;
     }
