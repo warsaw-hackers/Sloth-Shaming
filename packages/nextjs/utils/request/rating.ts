@@ -53,7 +53,7 @@ export const returnRating = async (address: string): Promise<number> => {
     console.log("Ratings array:", ratingsArray);
     // Calculate the average rating
     const averageRating = ratingsArray.reduce((sum, rating) => sum + rating, 0) / ratingsArray.length;
-    return Math.round(averageRating); // Return rounded integer value
+    return Math.max(1, Math.round(averageRating)); // Ensure the value is at least 1    
   } catch (error) {
     console.error("Failed to calculate rating:", error);
     return 80; // Return default score in case of an error
