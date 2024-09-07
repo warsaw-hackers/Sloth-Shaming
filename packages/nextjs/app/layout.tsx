@@ -1,4 +1,4 @@
-import { Pixelify_Sans } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "@rainbow-me/rainbowkit/styles.css";
 import { ScaffoldEthAppWithProviders } from "~~/components/ScaffoldEthAppWithProviders";
 import { ThemeProvider } from "~~/components/ThemeProvider";
@@ -6,7 +6,7 @@ import "~~/styles/globals.css";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 // If loading a variable font, you don't need to specify the font weight
-const pixelify = Pixelify_Sans({
+const montserrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
 });
@@ -18,7 +18,7 @@ export const metadata = getMetadata({
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html suppressHydrationWarning className={pixelify.className}>
+    <html suppressHydrationWarning className={montserrat.className}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -28,7 +28,7 @@ const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
         />
         <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet" />
       </head>
-      <body className="">
+      <body className="font-montserrat">
         <ThemeProvider enableSystem>
           <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
         </ThemeProvider>

@@ -27,13 +27,20 @@ export function SearchResult({ title, address, score, imageUrl, ensName }: Searc
             <p className="text-xl">SCORE:</p>
             {/* <span className="text-xl">{score ? `${score}/100` : ""}</span> */}
             {score && (
-              <progress
-                className="h-2 w-full progress-unfilled:bg-[#F2F2F2] progress-filled:bg-[#005F49]"
+              //   <progress
+              //     className="h-2 w-full progress-unfilled:bg-[#F2F2F2] progress-filled:bg-[#005F49]"
+              //     value={score ? score : 0}
+              //     max="100"
+              //   >
+              //     {score ? score : 0}
+              //   </progress>
+              <input
+                type="range"
+                min={0}
                 value={score ? score : 0}
                 max="100"
-              >
-                {score ? score : 0}
-              </progress>
+                className="range [--range-shdw:#005F49]"
+              />
             )}
           </div>
         </div>
