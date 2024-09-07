@@ -2723,7 +2723,7 @@ const deployedContracts = {
   },
   11155420: {
     SlothShaming: {
-      address: "0x2b39455e2ecbe95a636e53780df64e0bf559ba61",
+      address: "0xbf8c8ef202c8d14f8657f6e476c0f115906c773d",
       abi: [
         {
           type: "constructor",
