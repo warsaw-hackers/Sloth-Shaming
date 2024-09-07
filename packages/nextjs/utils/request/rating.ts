@@ -3,7 +3,6 @@ import { Types } from "@requestnetwork/request-client.js";
 
 export const returnRating = async (address: string): Promise<number> => {
   const requestNetwork = initializeRequestNetworkDummy()?.requestNetwork;
-  console.log("Request Network initialized:", requestNetwork);
   if (!requestNetwork) {
     return 80; // Default score if Request Network is not initialized
   }
@@ -27,29 +26,31 @@ export const returnRating = async (address: string): Promise<number> => {
     const ratingsArray: number[] = [];
 
     payerInvoices.forEach(invoice => {
-      const dueDate = new Date(invoice.contentData.paymentTerms.dueDate);
-      const currentDate = new Date();
+      if (invoice.contentData.paymentTerms && invoice.contentData.paymentTerms.dueDate) { // This line is needed to filter out invalid invoices
+        const dueDate = new Date(invoice.contentData.paymentTerms.dueDate);
+        const currentDate = new Date();
 
-      const isPaid = Number(invoice.balance?.balance) >= Number(invoice.expectedAmount);
+        const isPaid = Number(invoice.balance?.balance) >= Number(invoice.expectedAmount);
 
-      if (!isPaid && currentDate > dueDate) {
-        ratingsArray.push(0); // UNPAID AND LATE
-      } else if (isPaid) {
-        const paymentTimeStamp = invoice.balance?.events[0]?.timestamp;
-        let paymentDate = currentDate;
+        if (!isPaid && currentDate > dueDate) {
+          ratingsArray.push(0); // UNPAID AND LATE
+        } else if (isPaid) {
+          const paymentTimeStamp = invoice.balance?.events[0]?.timestamp;
+          let paymentDate = currentDate;
 
-        if (paymentTimeStamp) {
-          paymentDate = new Date(paymentTimeStamp * 1000); // Convert from seconds to milliseconds
-        }
+          if (paymentTimeStamp) {
+            paymentDate = new Date(paymentTimeStamp * 1000); // Convert from seconds to milliseconds
+          }
 
-        if (paymentDate <= dueDate) {
-          ratingsArray.push(100); // PAID ON TIME
-        } else {
-          ratingsArray.push(0); // PAID LATE
+          if (paymentDate <= dueDate) {
+            ratingsArray.push(100); // PAID ON TIME
+          } else {
+            ratingsArray.push(0); // PAID LATE
+          }
         }
       }
     });
-
+    console.log("Ratings array:", ratingsArray);
     // Calculate the average rating
     const averageRating = ratingsArray.reduce((sum, rating) => sum + rating, 0) / ratingsArray.length;
     return Math.round(averageRating); // Return rounded integer value
