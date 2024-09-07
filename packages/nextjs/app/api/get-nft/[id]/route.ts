@@ -89,7 +89,7 @@ const ANIMALS = [
 ];
 
 const SlothShaming = {
-  address: "0x2b39455e2ecbe95a636e53780df64e0bf559ba61",
+  address: "0xBf8C8Ef202C8D14f8657f6E476c0F115906c773D",
   abi: [
     {
       type: "constructor",
