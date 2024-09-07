@@ -16,8 +16,9 @@
 - ⛓️ **Dynamic NFT**: The associated NFT will be dynamically changed throughout your activity history on request network.
 - 🔎 **Search the Registry**: Search for anyone, using ther ethereum address or ENS name to quickly check their reputation.
 - 💅 **Name and Shame**: If a payer has a late payment, we have added a function to post an auto LLM generated roast on x dot com the everything app.
+- 🎨 **Handmade art**: Like the art you see? All art and assets for the sloth shaming project is hand drawn by [Maarten](https://x.com/Mdjvanh)
 
-![Landing page](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+![Landing page](assets/ui.png)
 
 ## Ratings
 
