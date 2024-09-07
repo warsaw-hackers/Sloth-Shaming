@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
 
   const filterRequests = (tab: "All" | "Pay" | "Get Paid") => {
     if (!totalRequestHistory) return [];
-
+    
     return totalRequestHistory.filter(request => {
       if (!request) return false;
       const status = calculateStatus(
