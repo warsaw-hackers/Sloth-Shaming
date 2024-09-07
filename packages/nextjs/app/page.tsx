@@ -117,17 +117,19 @@ const Home: NextPage = () => {
           </h1>
         </div>
         <div className="flex gap-4 flex-col justify-center items-center">
-          <AddressInput onChange={setValue} value={value} placeholder="Input your address" />
-          <button
-            className="btn bg-[#FE8731] hover:bg-[#E16811] border-none text-white"
-            // onClick={() => setIsSearchClick(true)}
-            // disabled={isFetchingNFT && isFetchingNFTData}
-            onClick={() => {
-              handleTweet();
-            }}
-          >
-            Shame
-          </button>
+          <AddressInput onChange={setValue} value={value} placeholder="Enter wallet address" />
+          {nftData?.animalData?.name === "Sloth" && (
+            <button
+              className="btn bg-[#FE8731] hover:bg-[#E16811] border-none text-white"
+              // onClick={() => setIsSearchClick(true)}
+              // disabled={isFetchingNFT && isFetchingNFTData}
+              onClick={() => {
+                handleTweet();
+              }}
+            >
+              Shame
+            </button>
+          )}
         </div>
         {/* <h1>{debouncedValue}</h1> */}
         {/* {!isSignedUp && (
