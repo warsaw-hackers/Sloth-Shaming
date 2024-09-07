@@ -792,21 +792,32 @@ export async function GET(req: NextRequest, context: any) {
   }
   let rating = await returnRating(data);
   let animalName = "";
-  switch (true) {
-    case rating < 70:
-      animalName = "sloth";
-    case rating >= 70 && rating < 90:
-      animalName = "wolf";
-    case rating >= 90:
-      animalName = "cheetah";
-    default:
-      animalName = "placeholder";
+  if (rating < 1) {
+    animalName = "placeholder";
+  } else if (rating < 70) {
+    animalName = "sloth";
+  } else if (rating >= 70 && rating < 90) {
+    animalName = "wolf";
+  } else if (rating >= 90) {
+    animalName = "cheetah";
   }
+  // switch (!!rating) {
+  //   case rating < 1:
+  //     animalName = "placeholder";
+  //   case rating < 70:
+  //     animalName = "sloth";
+  //   case rating >= 70 && rating < 90:
+  //     animalName = "wolf";
+  //   case rating >= 90:
+  //   default:
+  //     animalName = "";
+  // }
+  console.log("s🚀 ~ GET ~ animalName:", animalName, rating);
 
   const animalData =
     ANIMALS.find(animal => animal.name.toLowerCase() === animalName.toLowerCase()) || "Animal not found";
   try {
-    return NextResponse.json({ animalData });
+    return NextResponse.json({ animalData, rating, data });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ message: "Error checking wallet" });

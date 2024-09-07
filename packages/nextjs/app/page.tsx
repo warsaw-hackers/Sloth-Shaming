@@ -9,6 +9,7 @@ import { useAccount } from "wagmi";
 import { AddressInput } from "~~/components/scaffold-eth";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { usePinataRetrieveData } from "~~/hooks/usePinataRetrieveData";
+import { truncateAddress } from "~~/utils";
 
 async function fetchNFTData(id: number) {
   const response = await fetch(`/api/get-nft/${id}`);
@@ -32,7 +33,11 @@ const Home: NextPage = () => {
     500,
     [value],
   );
-  const { data: balance, refetch: refetchUserNft } = useScaffoldReadContract({
+  const {
+    data: balance,
+    refetch: refetchUserNft,
+    isFetching: isFetchingNFT,
+  } = useScaffoldReadContract({
     contractName: "SlothShaming",
     functionName: "idOf",
     args: [value],
@@ -43,7 +48,11 @@ const Home: NextPage = () => {
   //   args: [balance],
   // });
 
-  const { data: nftData, refetch: refetchNFTuri } = useQuery({
+  const {
+    data: nftData,
+    refetch: refetchNFTuri,
+    isFetching: isFetchingNFTData,
+  } = useQuery({
     queryKey: ["customData", Number(balance ?? 0)],
     queryFn: () => fetchNFTData(Number(balance ?? 0)),
     enabled: typeof balance == "bigint" && isSearchClick ? true : false,
@@ -95,16 +104,24 @@ const Home: NextPage = () => {
             />
           </label> */}
         <div className="flex flex-col gap-4 justify-center items-center">
-          <Image src={"/assets/placeholder.svg"} height={200} width={200} alt="home-page" />
-          <h1 className="text-[60px] tracking-tighter font-pixel">Enter Address</h1>
+          <Image
+            src={`/assets/${nftData?.animalData ? nftData.animalData.name.toLowerCase() : "placeholder"}.svg`}
+            height={200}
+            width={200}
+            alt="home-page"
+          />
+          <h1 className="text-[60px] tracking-tighter font-pixel">
+            {nftData?.data ? truncateAddress(nftData.data) : "Enter Address"}
+          </h1>
         </div>
-        <div className="flex gap-4 justify-center items-center">
+        <div className="flex gap-4 flex-col justify-center items-center">
           <AddressInput onChange={setValue} value={value} placeholder="Input your address" />
           <button
             className="btn bg-[#FE8731] hover:bg-[#E16811] border-none text-white"
             onClick={() => setIsSearchClick(true)}
+            disabled={isFetchingNFT && isFetchingNFTData}
           >
-            Search
+            Shame
           </button>
         </div>
         {/* <h1>{debouncedValue}</h1> */}
@@ -120,17 +137,26 @@ const Home: NextPage = () => {
               cancel();
             }}
           ></button>
-          <div className="px-5">
-            <div>
-              {" "}
-              {value}
-              {data && (
-                <div className="my-4">
-                  <img src={`data:image/svg+xml;base64,${btoa(data)}`} alt="SVG from IPFS" className="w-8 h-8" />
+          {/* <div className="px-5">
+            <div> {value}</div>
+          </div> */}
+          {/* <div className="card card-compact bg-base-100 w-96 shadow-xl">
+            {data && (
+              <div>
+                <div className="flex p-3 py-6 text-center">
+                  <figure>
+                    <img src={`data:image/svg+xml;base64,${btoa(data)}`} alt="SVG from IPFS" className="w-24 h-24" />
+                  </figure>
+                  <div className="card-body text-center ">
+                    <h2 className="card-title ">{nftData?.animalData?.name}</h2>
+                  </div>
                 </div>
-              )}
-            </div>
-          </div>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary">Buy Now</button>
+                </div>
+              </div>
+            )}
+          </div> */}
         </div>
       </div>
     </>
