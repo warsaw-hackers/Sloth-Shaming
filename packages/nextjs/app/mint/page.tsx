@@ -75,7 +75,7 @@ const Mint: React.FC = () => {
     });
   };
   return (
-    <div className="container mx-auto p-8 text-white tracking-tighter">
+    <div className="container mx-auto p-8  text-white tracking-tighter">
       <h1 className="text-center mb-4 mt-5">
         <span className="block text-4xl font-bold">Register your reputation</span>
       </h1>
@@ -146,26 +146,40 @@ const Mint: React.FC = () => {
         )}
 
         {hasMintedNFT && (
-          <div className="w-full max-w-lg bg-[#06B089] shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-8 m-8">
+          <div className="w-full h-[540px] max-w-lg bg-[#06B089] shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-8 m-8">
             <div className="flex flex-col text-center mb-4">
               <span className="text-3xl font-semibold">Your reputation NFT</span>
             </div>
             <div className="flex justify-center items-center content-center">
-              <Image
-                src={`/assets/${
-                  nftData?.animalData ? removeSpaces(nftData.animalData.name).toLowerCase() : "slowsloth"
-                }.svg`}
-                height={200}
-                width={200}
-                className="ml-4"
-                alt="home-page"
-              />
+              {isFetchingNFTData || !nftData ? (
+                <div className="flex flex-col justify-center items-center gap-4 relative h-[320px]">
+                  <img
+                    src="/assets/question-mark1.svg"
+                    className={`${isFetchingNFTData ? "animate-bounce" : "ml-2 mt-20"} `}
+                    alt="questionMark1"
+                    width={65}
+                    height={300}
+                  />
+                </div>
+              ) : (
+                <Image
+                  src={`/assets/${
+                    nftData?.animalData ? removeSpaces(nftData.animalData.name).toLowerCase() : "slowsloth"
+                  }.svg`}
+                  height={200}
+                  width={200}
+                  className="ml-4"
+                  alt="home-page"
+                />
+              )}
             </div>
             <div className="flex justify-between mt-4">
-              <div className="text-white tracking-tighter justify-center flex flex-col gap-0 -space-y-2">
-                {/* <p>Rank: {nftData?.animalData.name ? nftData.animalData.name : "Sloth"}</p>  */}
-                <p className="text-lg">Rating: {nftData?.rating ? nftData.rating : 0}/100 </p>
-              </div>
+              {nftData?.rating && (
+                <div className="text-white tracking-tighter justify-center flex flex-col gap-0 -space-y-2">
+                  {/* <p>Rank: {nftData?.animalData.name ? nftData.animalData.name : "Sloth"}</p>  */}
+                  <p className="text-lg">Rating: {nftData?.rating ? nftData.rating : 0}/100 </p>
+                </div>
+              )}
               <ul className="text-white tracking-tighter justify-end items-start flex flex-col gap-0 space-y-0">
                 {nftData &&
                   nftData.animalData?.attributes?.map((attr: any) => {
