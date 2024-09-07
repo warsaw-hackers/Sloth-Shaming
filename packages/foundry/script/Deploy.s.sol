@@ -23,5 +23,7 @@ contract DeployScript is ScaffoldETHDeploy {
             actionId
         );
         vm.stopBroadcast();
+
+        exportDeployments();
     }
 }
