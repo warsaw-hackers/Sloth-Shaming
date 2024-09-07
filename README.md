@@ -10,7 +10,7 @@
   </p>
 </h4>
 
-🦥 Sloth Shaming is a platform that allows you to create a profile, receive ratings based on your invoices on Request Network, and wether or not you are paying them on time. Late payers will be named and shamed, and responsible payers will be rewarded with good reputation, and as an effect, have poovable crdibility.
+🦥 Sloth Shaming is a platform that allows you to create a profile, receive ratings based on your invoices on Request Network, and wether or not you are paying them on time. Late payers will be named and shamed, and responsible payers will be rewarded with good reputation, and as an effect, have provable credibility.
 
 - ✅ **Register account**: Register an account using metamask.
 - 🩻 **SoulBound**: Upon registration users will receive a soulbound token that represents their profile.
