@@ -205,11 +205,13 @@ contract SlothShaming is ERC721, Ownable {
      *  Airdrops a token to a user
      *
      * @param _to the address to airdrop to
-     * @param _id the id of the token to airdrop
      *
      */
-    function airdrop(address _to, uint256 _id) external onlyOwner {
+    function airdrop(address _to) external onlyOwner {
         // Super mint
-        super._mint(_to, _id);
+        super._mint(_to, currentId);
+
+        // Increment currentId
+        currentId++;
     }
 }
