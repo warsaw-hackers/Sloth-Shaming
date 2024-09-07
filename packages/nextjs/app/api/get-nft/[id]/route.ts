@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 const ANIMALS = [
   {
-    name: "Sloth",
+    name: "Slow Sloth",
     description:
       "A special edition character that reflects your invoice payment behavior. Taking it slow, just like the laid-back Sloth 🦥.",
     attributes: [
@@ -27,7 +27,7 @@ const ANIMALS = [
     image: "https://lavender-manual-goat-205.mypinata.cloud/ipfs/QmbfwSxAvyJJW5XbnY5Zp8Z3dViumiWYQ1AhAMVRcm8B3B",
   },
   {
-    name: "Cheetah",
+    name: "Speedy Cheetah",
     description:
       "A special edition character that reflects your invoice payment behavior. Fast and furious, you're as quick as a Cheetah 🐆.",
     attributes: [
@@ -47,7 +47,7 @@ const ANIMALS = [
     image: "https://lavender-manual-goat-205.mypinata.cloud/ipfs/QmZV1FASZ4xGVGGVzeZscNF2o2UcEHKaXeZEeLg9hU3wEV",
   },
   {
-    name: "Wolf",
+    name: "Neutral Wolf",
     description:
       "A special edition character that reflects your invoice payment behavior. Always on time, just like the reliable Wolf 🐺.",
     attributes: [
@@ -794,11 +794,11 @@ export async function GET(req: NextRequest, context: any) {
   let animalName = "";
 
   if (rating < 70) {
-    animalName = "sloth";
+    animalName = "slow sloth";
   } else if (rating >= 70 && rating < 90) {
-    animalName = "wolf";
+    animalName = "neutral wolf";
   } else if (rating >= 90) {
-    animalName = "cheetah";
+    animalName = "speedy cheetah";
   } else {
     animalName = "placeholder";
   }

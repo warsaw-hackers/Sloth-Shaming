@@ -6,3 +6,9 @@ export const truncateAddress = (address: string) => {
 
   return `${prefix}...${suffix}`;
 };
+
+export function removeSpaces(str: string): string {
+  console.log("animal name", str);
+
+  return str.replace(/\s+/g, "");
+}

@@ -1,9 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 
 const defaultTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
 module.exports = {
   content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./utils/**/*.{js,ts,jsx,tsx}"],
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    plugin(function ({ addVariant }) {
+      addVariant("progress-unfilled", ["&::-webkit-progress-bar", "&"]);
+      addVariant("progress-filled", ["&::-webkit-progress-value", "&::-moz-progress-bar", "&"]);
+    }),
+  ],
   darkTheme: "dark",
   darkMode: ["selector", "[data-theme='dark']"],
   // DaisyUI theme colors

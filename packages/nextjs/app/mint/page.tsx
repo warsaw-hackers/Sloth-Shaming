@@ -9,6 +9,7 @@ import { useTheme } from "next-themes";
 import { decodeAbiParameters, parseAbiParameters } from "viem";
 import { useAccount } from "wagmi";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { removeSpaces } from "~~/utils";
 
 const Mint: React.FC = () => {
   const { address } = useAccount();
@@ -81,13 +82,13 @@ const Mint: React.FC = () => {
 
       <div className="flex justify-center items-center">
         {hasMintedNFT && (
-          <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-4 m-4 text-center">
+          <div className="w-full text-xl max-w-lg bg-[#06B089] shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-4 m-4 text-center">
             <p>You have already minted your reputation NFT. </p>
           </div>
         )}
 
         {isEligibleToMint && !proof && (
-          <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-4 m-4 text-center">
+          <div className="w-full max-w-lg bg-[#06B089] shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-4 m-4 text-center">
             <p>We use Worldcoin World ID to verify your identity. Please sign in to continue. </p>
             <IDKitWidget
               app_id={process.env.NEXT_PUBLIC_APP_ID as `app_${string}`}
@@ -114,7 +115,7 @@ const Mint: React.FC = () => {
         )}
 
         {isEligibleToMint && proof && (
-          <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-4 m-4 text-center">
+          <div className="w-full max-w-lg bg-[#06B089] shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-4 m-4 text-center">
             <p>You have verified with World ID. </p>
             <p>Powered by: </p>
             <div>
@@ -130,17 +131,13 @@ const Mint: React.FC = () => {
 
       <div className="flex justify-center items-center">
         {isEligibleToMint && (
-          <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-8 m-8">
+          <div className="w-full max-w-lg bg-[#06B089] shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-8 m-8">
             <div className="flex flex-col text-center mb-4">
               <span className="text-2xl font-semibold">Mint your reputation NFT</span>
             </div>
             <div className="flex flex-col space-y-4">
               <div className="flex flex-col items-center mt-4">
-                <button
-                  className="btn btn-primary"
-                  // disabled={!proof}
-                  onClick={handleMint}
-                >
+                <button className="btn btn-primary" disabled={!proof} onClick={handleMint}>
                   Mint
                 </button>
               </div>
@@ -149,13 +146,15 @@ const Mint: React.FC = () => {
         )}
 
         {hasMintedNFT && (
-          <div className="w-full max-w-lg bg-base-100 shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-8 m-8">
+          <div className="w-full max-w-lg bg-[#06B089] shadow-lg shadow-secondary border-8 border-secondary rounded-xl p-8 m-8">
             <div className="flex flex-col text-center mb-4">
-              <span className="text-2xl font-semibold">Your reputation NFT</span>
+              <span className="text-3xl font-semibold">Your reputation NFT</span>
             </div>
             <div className="flex justify-center items-center content-center">
               <Image
-                src={`/assets/${nftData?.animalData ? nftData.animalData.name.toLowerCase() : "sloth"}.svg`}
+                src={`/assets/${
+                  nftData?.animalData ? removeSpaces(nftData.animalData.name).toLowerCase() : "slowsloth"
+                }.svg`}
                 height={200}
                 width={200}
                 className="ml-4"
@@ -165,13 +164,13 @@ const Mint: React.FC = () => {
             <div className="flex justify-between mt-4">
               <div className="text-white tracking-tighter justify-center flex flex-col gap-0 -space-y-2">
                 {/* <p>Rank: {nftData?.animalData.name ? nftData.animalData.name : "Sloth"}</p>  */}
-                <p>Rating: {nftData?.rating ? nftData.rating : 0}/100 </p>
+                <p className="text-lg">Rating: {nftData?.rating ? nftData.rating : 0}/100 </p>
               </div>
               <ul className="text-white tracking-tighter justify-end items-start flex flex-col gap-0 space-y-0">
                 {nftData &&
                   nftData.animalData?.attributes?.map((attr: any) => {
                     return (
-                      <li>
+                      <li className="text-lg">
                         {attr.trait_type} : {attr.value}
                       </li>
                     );
