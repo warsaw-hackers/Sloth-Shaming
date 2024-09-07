@@ -82,7 +82,7 @@ Our dapp fully supports ENS names, and users are able to search and interact wit
 ## Links
 
 - [Devfolio](https://devfolio.co/projects/sloth-shaming-bea7)
-- [Vercel](ttps://sloths-warsaw.vercel.app/)
+- [Vercel](https://sloths-warsaw.vercel.app/)
 - [Github](https://github.com/warsaw-hackers/Sloth-Shaming)
 
 ### Deployments
