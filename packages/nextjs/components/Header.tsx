@@ -21,6 +21,14 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
+    label: "Mint",
+    href: "/mint",
+  },
+  {
+    label: "Shame",
+    href: "/shame",
+  },
+  {
     label: "Invoice Dashboard",
     href: "/request-dashboard",
     icon: <DocumentDuplicateIcon className="h-4 w-4" />,
