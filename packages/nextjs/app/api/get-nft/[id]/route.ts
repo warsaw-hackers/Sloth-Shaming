@@ -793,11 +793,11 @@ export async function GET(req: NextRequest, context: any) {
   let rating = await returnRating(data);
   let animalName = "";
   switch (true) {
-    case rating < 34:
+    case rating < :
       animalName = "sloth";
-    case rating >= 34 && rating < 67:
+    case rating >= 70 && rating < 90:
       animalName = "wolf";
-    case rating >= 67:
+    case rating >= 90:
       animalName = "cheetah";
     default:
       animalName = "placeholder";
