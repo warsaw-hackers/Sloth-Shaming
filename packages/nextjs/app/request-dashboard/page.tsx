@@ -35,7 +35,6 @@ const Dashboard: React.FC = () => {
         console.error("Failed to fetch request history:", error);
       });
   }, [address, requestNetwork]);
-
   const filterRequests = (tab: "All" | "Pay" | "Get Paid") => {
     if (!totalRequestHistory) return [];
 

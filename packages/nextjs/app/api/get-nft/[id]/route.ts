@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { returnRating } from "~~/utils/request/rating";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 export const dynamic = "force-dynamic";
 
@@ -88,12 +90,33 @@ const ANIMALS = [
 export async function GET(req: NextRequest, context: any) {
   const { params } = context;
   console.log("🚀 ~ GET ~ params:", params);
-  // const walletAddress = params.walletAddress;
 
   if (!params.id) {
     return new NextResponse("No nft id provided", { status: 400 });
   }
-  let animalName = "sloth";
+
+
+  const { data: address} = await useScaffoldReadContract({
+    contractName: "SlothShaming",
+    functionName: "ownerOf",
+    args: [params.id]
+  });
+  if (!address) {
+    return new NextResponse("No nft id provided", { status: 400 });
+  }
+  let rating = await returnRating(address);
+  let animalName = "";
+  switch (true) {
+    case (rating < 34):
+      animalName = "sloth";
+    case (rating >= 34 && rating < 67):
+      animalName = "wolf";
+    case (rating >= 67):
+      animalName = "cheetah";
+    default:
+      animalName = "placeholder";
+  }
+
   const animalData =
     ANIMALS.find(animal => animal.name.toLowerCase() === animalName.toLowerCase()) || "Animal not found";
   try {
