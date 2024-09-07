@@ -31,6 +31,8 @@ The formula for calculating the rating made like this: We loop through all the i
 | ![Sloth](assets/SlothChar.svg) |![Wolf](assets/WolfChar.svg) | ![Cheetah](assets/CheetahChar.svg) |
 
 
+If you find a sloth, there is the possibility to post a roast for this slow payee on x dot com the everything app in a single click
+
 ## Diagrams
 ### Create NFT
 ![Create Nft](assets/create_nft.png)
