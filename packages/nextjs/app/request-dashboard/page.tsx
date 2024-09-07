@@ -15,7 +15,6 @@ const Dashboard: React.FC = () => {
   const [totalRequestHistory, setTotalRequestHistory] = useState<Types.IRequestDataWithEvents[] | undefined>();
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(null);
 
-
   useEffect(() => {
     if (walletClient) {
       initializeRequestNetwork(setRequestNetwork, walletClient);
